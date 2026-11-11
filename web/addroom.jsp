@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 if (session.getAttribute("admin") == null) {
     response.sendRedirect("login.jsp?error=Please Login as Admin");
@@ -6,17 +6,17 @@ if (session.getAttribute("admin") == null) {
 }
 String error = request.getParameter("error");
 String errorMessage = null;
-if ("invalid".equals(error)) errorMessage = "Please enter valid room details.";
-else if ("duplicate".equals(error)) errorMessage = "Could not add room. Check the room number and database connection.";
-else if ("number".equals(error)) errorMessage = "Room number, capacity and price must be valid numbers.";
-else if ("failed".equals(error)) errorMessage = "Unable to add room.";
+if ("invalid".equals(error)) errorMessage = "Vui lòng nhập đầy đủ thông tin hợp lệ.";
+else if ("duplicate".equals(error)) errorMessage = "Không thể thêm phòng. Hãy kiểm tra số phòng và kết nối cơ sở dữ liệu.";
+else if ("number".equals(error)) errorMessage = "Số phòng, sức chứa và giá phải là số hợp lệ.";
+else if ("failed".equals(error)) errorMessage = "Không thể thêm phòng.";
 %>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Room</title>
+<title>Thêm phòng</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style>
@@ -31,7 +31,7 @@ body { background:#f5f5f5; font-family:Segoe UI,sans-serif; }
 <%@include file="adminnavbar.jsp"%>
 <div class="container">
   <div class="card">
-    <div class="card-header">Add New Room</div>
+    <div class="card-header">Thêm phòng mới</div>
     <div class="card-body p-4">
       <% if (errorMessage != null) { %>
         <div class="alert alert-danger"><%=errorMessage%></div>
@@ -39,46 +39,46 @@ body { background:#f5f5f5; font-family:Segoe UI,sans-serif; }
       <form action="AddRoomServlet" method="post">
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label class="form-label">Room Number</label>
+            <label class="form-label">Số phòng</label>
             <input type="number" name="roomNumber" class="form-control" min="1" required>
           </div>
           <div class="col-md-6 mb-3">
-            <label class="form-label">Room Type</label>
+            <label class="form-label">Loại phòng</label>
             <select name="roomType" class="form-select" required>
-              <option value="Single">Single</option><option value="Double">Double</option>
-              <option value="Deluxe">Deluxe</option><option value="Suite">Suite</option>
-              <option value="Family">Family</option><option value="Executive">Executive</option>
-              <option value="Presidential">Presidential</option><option value="Honeymoon">Honeymoon</option>
+              <option value="Single">Phòng đơn</option><option value="Double">Phòng đôi</option>
+              <option value="Deluxe">Phòng Deluxe</option><option value="Suite">Phòng Suite</option>
+              <option value="Family">Phòng gia đình</option><option value="Executive">Phòng Executive</option>
+              <option value="Presidential">Phòng Tổng thống</option><option value="Honeymoon">Phòng trăng mật</option>
             </select>
           </div>
           <div class="col-md-6 mb-3">
-            <label class="form-label">Capacity (persons)</label>
+            <label class="form-label">Sức chứa (người)</label>
             <input type="number" name="capacity" class="form-control" min="1" value="2" required>
           </div>
           <div class="col-md-6 mb-3">
-            <label class="form-label">Price per night</label>
+            <label class="form-label">Giá mỗi đêm</label>
             <input type="number" name="price" class="form-control" min="0.01" step="0.01" required>
           </div>
           <div class="col-md-12 mb-3">
-            <label class="form-label">Description</label>
+            <label class="form-label">Mô tả</label>
             <textarea name="description" class="form-control" rows="4" required></textarea>
           </div>
           <div class="col-md-6 mb-3">
-            <label class="form-label">Room image path</label>
+            <label class="form-label">Đường dẫn ảnh phòng</label>
             <input type="text" name="roomImage" class="form-control" value="images/standard.jpg" required>
-            <small class="text-muted">Use a path relative to the web folder, for example images/deluxe.jpg.</small>
+            <small class="text-muted">Nhập images/deluxe.jpg, tên file như deluxe.jpg trong web/images, hoặc link ảnh bắt đầu bằng https://.</small>
           </div>
           <div class="col-md-6 mb-3">
-            <label class="form-label">Status</label>
+            <label class="form-label">Trạng thái</label>
             <select name="status" class="form-select" required>
-              <option value="Available">Available</option>
-              <option value="Maintenance">Maintenance</option>
-              <option value="Booked">Booked</option>
+              <option value="Available">Còn trống</option>
+              <option value="Maintenance">Đang bảo trì</option>
+              <option value="Booked">Đã đặt</option>
             </select>
           </div>
           <div class="col-12 text-center mt-3">
-            <button type="submit" class="btn btn-save btn-lg"><i class="fa-solid fa-floppy-disk"></i> Save Room</button>
-            <a href="ManageRoomServlet" class="btn btn-secondary btn-lg ms-3"><i class="fa-solid fa-arrow-left"></i> Cancel</a>
+            <button type="submit" class="btn btn-save btn-lg"><i class="fa-solid fa-floppy-disk"></i>Lưu phòng</button>
+            <a href="ManageRoomServlet" class="btn btn-secondary btn-lg ms-3"><i class="fa-solid fa-arrow-left"></i>Hủy</a>
           </div>
         </div>
       </form>

@@ -4,15 +4,16 @@
     Author     : Asus
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Login | Royal Virasat Hotel</title>
+<title>Đăng nhập | Khách sạn Mường Thanh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -25,7 +26,7 @@ body{
 
 .banner{
     height:250px;
-    background:url("images/virasat.jpg");
+    background:url("images/room2.png");
     background-size:cover;
     background-position:center;
     display:flex;
@@ -157,13 +158,81 @@ label{
 
 <div class="banner">
 
-<h1>Login</h1>
+<h1>Đăng nhập</h1>
 
 </div>
 
 <div class="login-card">
 
-<h2>Account Login</h2>
+<h2>Đăng nhập tài khoản</h2>
+
+<%!
+private String viRoomType(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Single": return "Phòng đơn";
+        case "Double": return "Phòng đôi";
+        case "Standard": return "Phòng tiêu chuẩn";
+        case "Deluxe": return "Phòng Deluxe";
+        case "Suite": return "Phòng Suite";
+        case "Family": return "Phòng gia đình";
+        case "Executive": return "Phòng Executive";
+        case "Presidential": return "Phòng Tổng thống";
+        case "Honeymoon": return "Phòng trăng mật";
+        default: return value;
+    }
+}
+private String viRoomStatus(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Available": return "Còn trống";
+        case "Booked": return "Đã đặt";
+        case "Maintenance": return "Đang bảo trì";
+        case "Pending": return "Đang chờ";
+        case "Confirmed": return "Đã xác nhận";
+        case "Checked In": return "Đã nhận phòng";
+        case "Checked Out": return "Đã trả phòng";
+        case "Cancelled": return "Đã hủy";
+        default: return value;
+    }
+}
+private String viGender(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Male": return "Nam";
+        case "Female": return "Nữ";
+        case "Other": return "Khác";
+        default: return value;
+    }
+}
+private String viMessage(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Invalid Email": return "Email không tồn tại.";
+        case "Invalid Password": return "Mật khẩu không chính xác.";
+        case "Login Failed": return "Đăng nhập không thành công.";
+        case "Please Login as Admin": return "Vui lòng đăng nhập bằng tài khoản quản trị viên.";
+        case "Please Login First": return "Vui lòng đăng nhập trước.";
+        case "Please login to book a room.": return "Vui lòng đăng nhập để đặt phòng.";
+        case "Please Fill All Required Fields": return "Vui lòng điền đầy đủ các trường bắt buộc.";
+        case "Email Already Registered": return "Email này đã được đăng ký.";
+        case "Registration Failed": return "Đăng ký không thành công.";
+        case "Something Went Wrong": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Email not found.": return "Không tìm thấy email này.";
+        case "Something went wrong.": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Password updated successfully. Please login.": return "Cập nhật mật khẩu thành công. Vui lòng đăng nhập.";
+        case "Customer Not Found": return "Không tìm thấy khách hàng.";
+        case "Current Password is Incorrect": return "Mật khẩu hiện tại không đúng.";
+        case "New Password and Confirm Password do not match": return "Mật khẩu mới và mật khẩu xác nhận không khớp.";
+        case "Unable to Change Password": return "Không thể đổi mật khẩu.";
+        case "Password Changed Successfully": return "Đổi mật khẩu thành công.";
+        case "Room Added Successfully": return "Thêm phòng thành công.";
+        case "Room Updated Successfully": return "Cập nhật phòng thành công.";
+        case "Unable to Update Room": return "Không thể cập nhật phòng.";
+        default: return value;
+    }
+}
+%>
 
 <%
 String success=request.getParameter("success");
@@ -172,11 +241,7 @@ String error=request.getParameter("error");
 if(success!=null){
 %>
 
-<div class="success-box">
-
-Registration Successful! Please Login.
-
-</div>
+<div class="success-box">Đăng ký thành công! Vui lòng đăng nhập.</div>
 
 <%
 }
@@ -186,7 +251,7 @@ if(error!=null){
 
 <div class="error-box">
 
-<%=error%>
+<%=viMessage(error)%>
 
 </div>
 
@@ -198,7 +263,7 @@ if(error!=null){
 method="post"
 onsubmit="return validateForm();">
 
-<label>Login As</label>
+<label>Đăng nhập với vai trò</label>
 
 <div class="mt-2">
 
@@ -207,19 +272,15 @@ name="role"
 value="customer"
 checked>
 
-Customer
+Khách hàng
 
 &nbsp;&nbsp;&nbsp;&nbsp;
 
 <input type="radio"
 name="role"
-value="admin">
+value="admin">Quản trị viên</div>
 
-Admin
-
-</div>
-
-<label>Email Address</label>
+<label>Địa chỉ email</label>
 
 <input
 type="email"
@@ -231,7 +292,7 @@ autocomplete="off">
 
 <span id="emailError" class="error"></span>
 
-<label>Password</label>
+<label>Mật khẩu</label>
 
 <div class="input-group">
 
@@ -258,25 +319,13 @@ onclick="togglePassword()">
 
 <button
 type="submit"
-class="btn-login">
-
-Login
-
-</button>
+class="btn-login">Đăng nhập</button>
 
 <div class="links">
 
-<a href="forgotpassword.jsp">
+<a href="forgotpassword.jsp">Quên mật khẩu?</a>
 
-Forgot Password?
-
-</a>
-
-<a href="register.jsp">
-
-New User? Register
-
-</a>
+<a href="register.jsp">Chưa có tài khoản? Đăng ký</a>
 
 </div>
 
@@ -299,12 +348,12 @@ function validateEmail(){
     let pattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if(email==""){
-        error.innerHTML="Email is required";
+        error.innerHTML="Vui lòng nhập email";
         return false;
     }
 
     if(!pattern.test(email)){
-        error.innerHTML="Enter a valid email address";
+        error.innerHTML="Vui lòng nhập email hợp lệ";
         return false;
     }
 
@@ -319,12 +368,12 @@ function validatePassword(){
     let error=document.getElementById("passwordError");
 
     if(password==""){
-        error.innerHTML="Password is required";
+        error.innerHTML="Vui lòng nhập mật khẩu";
         return false;
     }
 
     if(password.length<8){
-        error.innerHTML="Password must be at least 8 characters";
+        error.innerHTML="Mật khẩu phải có ít nhất 8 ký tự";
         return false;
     }
 

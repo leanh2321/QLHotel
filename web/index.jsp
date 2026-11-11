@@ -3,15 +3,15 @@
     Created on : 23 Jul 2026, 8:55:11 pm
     Author     : Asus
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 
-<html>
+<html lang="vi">
 
 <head>
 
-<title>Muong Thanh Hotel</title>
+<title>Khách sạn Mường Thanh</title>
 
 <meta charset="UTF-8">
 
@@ -40,7 +40,7 @@ font-family:Segoe UI;
 
 height:90vh;
 
-background:url("images/virasat.jpg");
+background:url("images/metropole1.png");
 
 background-size:cover;
 
@@ -102,7 +102,8 @@ margin:20px 0;
 
 }
 
-.hero button{
+.hero button,
+.hero a{
 
 padding:14px 35px;
 
@@ -115,6 +116,12 @@ font-size:18px;
 border-radius:40px;
 
 transition:.4s;
+
+display:inline-block;
+
+text-decoration:none;
+
+color:#111;
 
 }
 
@@ -130,7 +137,8 @@ background:white;
 
 }
 
-.hero button:hover{
+.hero button:hover,
+.hero a:hover{
 
 transform:scale(1.08);
 
@@ -234,29 +242,13 @@ color:#D4AF37;
 
 <div class="hero-content">
 
-<h1>
+<h1>Đẳng cấp được định nghĩa lại</h1>
 
-Luxury Redefined
+<p>Tận hưởng tiện nghi, sự tinh tế và dịch vụ hiếu khách đẳng cấp</p>
 
-</h1>
+<a class="book" href="<%=request.getContextPath()%>/RoomServlet">Đặt ngay</a>
 
-<p>
-
-Experience Comfort, Elegance & World-Class Hospitality
-
-</p>
-
-<button class="book">
-
-Book Now
-
-</button>
-
-<button class="explore">
-
-Explore Rooms
-
-</button>
+<a class="explore" href="<%=request.getContextPath()%>/RoomServlet">Khám phá phòng nghỉ</a>
 
 </div>
 
@@ -264,11 +256,7 @@ Explore Rooms
 
 <!------------ Why Choose Us ------------>
 
-<h2 class="section-title">
-
-Why Choose Us
-
-</h2>
+<h2 class="section-title">Vì sao chọn chúng tôi</h2>
 
 <div class="container">
 
@@ -278,9 +266,9 @@ Why Choose Us
 
 <i class="fa-solid fa-bed"></i>
 
-<h4>Luxury Rooms</h4>
+<h4>Phòng nghỉ sang trọng</h4>
 
-<p>Elegant rooms with premium interiors.</p>
+<p>Phòng nghỉ trang nhã với nội thất cao cấp.</p>
 
 </div>
 
@@ -288,9 +276,9 @@ Why Choose Us
 
 <i class="fa-solid fa-utensils"></i>
 
-<h4>Fine Dining</h4>
+<h4>Ẩm thực tinh tế</h4>
 
-<p>Enjoy delicious cuisines from our chefs.</p>
+<p>Thưởng thức những món ăn hấp dẫn do đầu bếp của chúng tôi chế biến.</p>
 
 </div>
 
@@ -298,9 +286,9 @@ Why Choose Us
 
 <i class="fa-solid fa-wifi"></i>
 
-<h4>Free Wi-Fi</h4>
+<h4>Wi-Fi miễn phí</h4>
 
-<p>High-speed internet throughout the hotel.</p>
+<p>Internet tốc độ cao trong toàn khách sạn.</p>
 
 </div>
 
@@ -308,9 +296,9 @@ Why Choose Us
 
 <i class="fa-solid fa-person-swimming"></i>
 
-<h4>Swimming Pool</h4>
+<h4>Hồ bơi</h4>
 
-<p>Relax in our luxurious outdoor pool.</p>
+<p>Thư giãn tại hồ bơi ngoài trời sang trọng.</p>
 
 </div>
 
@@ -320,11 +308,7 @@ Why Choose Us
 
 <!------------ Featured Rooms ------------>
 
-<h2 class="section-title">
-
-Featured Rooms
-
-</h2>
+<h2 class="section-title">Phòng nổi bật</h2>
 
 <div class="container">
 
@@ -338,9 +322,9 @@ Featured Rooms
 
 <div class="card-body">
 
-<h4>Single Room</h4>
+<h4>Phòng đơn</h4>
 
-<p>₹8,000 / Night</p>
+<p>850.000 ₫ / đêm</p>
 
 </div>
 
@@ -356,9 +340,9 @@ Featured Rooms
 
 <div class="card-body">
 
-<h4>Deluxe Room</h4>
+<h4>Phòng Deluxe</h4>
 
-<p>₹12,000 / Night</p>
+<p>1.250.000 ₫ / đêm</p>
 
 </div>
 
@@ -374,9 +358,9 @@ Featured Rooms
 
 <div class="card-body">
 
-<h4>Suite Room</h4>
+<h4>Phòng Suite</h4>
 
-<p>₹25,000 / Night</p>
+<p>2.500.000 ₫ / đêm</p>
 
 </div>
 
@@ -400,19 +384,15 @@ Featured Rooms
 
 <h3>
 
-"What a wonderful experience!"
+"Thật là một trải nghiệm tuyệt vời!"
 
 </h3>
 
-<p>
-
-Luxury rooms, delicious food and excellent hospitality.
-
-</p>
+<p>Phòng nghỉ sang trọng, món ăn ngon và dịch vụ tuyệt vời.</p>
 
 <h5>
 
-- Happy Customer
+- Khách hàng hài lòng
 
 </h5>
 

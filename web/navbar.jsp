@@ -3,7 +3,7 @@
     Created on : 23 Jul 2026, 9:09:49 pm
     Author     : Asus
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
 Object loggedCustomer = session.getAttribute("customer");
@@ -11,7 +11,7 @@ Object loggedAdmin = session.getAttribute("admin");
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 
 <link rel="stylesheet"
@@ -154,13 +154,13 @@ color:black;
 
 <div class="logo">
 
-<img src="images/Gemini_Generated_Image_e9hnoce9hnoce9hn-removebg-preview.png" alt="Royal Virasat Logo">
+<img src="images/muong thanh.png" alt="Biểu trưng Royal Virasat">
 
 <div class="logo-text">
 
 <h2>Khách sạn Mường Thanh</h2>
 
-<p>Luxury Hotel & Resort</p>
+<p>Khách sạn và khu nghỉ dưỡng cao cấp</p>
 
 </div>
 
@@ -168,17 +168,17 @@ color:black;
 
 <ul class="nav-links">
 
-<li><a href="index.jsp">Home</a></li>
+<li><a href="index.jsp">Trang chủ</a></li>
 
-<li><a href="about.jsp">About</a></li>
+<li><a href="about.jsp">Giới thiệu</a></li>
 
-<li><a href="RoomServlet">Rooms</a></li>
+<li><a href="RoomServlet">Phòng nghỉ</a></li>
 
-<li><a href="gallery.jsp">Gallery</a></li>
+<li><a href="gallery.jsp">Thư viện ảnh</a></li>
 
-<li><a href="restaurant.jsp">Restaurant</a></li>
+<li><a href="restaurant.jsp">Nhà hàng</a></li>
 
-<li><a href="contact.jsp">Contact</a></li>
+<li><a href="contact.jsp">Liên hệ</a></li>
 
 </ul>
 
@@ -186,37 +186,25 @@ color:black;
 
 <% if(loggedAdmin != null){ %>
 
-<a href="admindashboard.jsp" class="login">
-Dashboard
-</a>
+<a href="admindashboard.jsp" class="login">Tổng quan</a>
 
-<a href="LogoutServlet" class="register">
-Logout
-</a>
+<a href="LogoutServlet" class="register">Đăng xuất</a>
 
 <% } else if(loggedCustomer != null){ %>
 
-<a href="CustomerDashboardServlet" class="login">
-Dashboard
-</a>
+<a href="CustomerDashboardServlet" class="login">Tổng quan</a>
 
-<a href="LogoutServlet" class="register">
-Logout
-</a>
+<a href="LogoutServlet" class="register">Đăng xuất</a>
 
 <% } else { %>
 
 <a href="register.jsp" class="register">
 
-Register
+Đăng ký
 
 </a>
 
-<a href="login.jsp" class="login">
-
-Login
-
-</a>
+<a href="login.jsp" class="login">Đăng nhập</a>
 
 <% } %>
 

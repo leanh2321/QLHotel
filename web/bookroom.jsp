@@ -1,5 +1,74 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@page import="model.Room"%>
+
+<%!
+private String viRoomType(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Single": return "Phòng đơn";
+        case "Double": return "Phòng đôi";
+        case "Standard": return "Phòng tiêu chuẩn";
+        case "Deluxe": return "Phòng Deluxe";
+        case "Suite": return "Phòng Suite";
+        case "Family": return "Phòng gia đình";
+        case "Executive": return "Phòng Executive";
+        case "Presidential": return "Phòng Tổng thống";
+        case "Honeymoon": return "Phòng trăng mật";
+        default: return value;
+    }
+}
+private String viRoomStatus(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Available": return "Còn trống";
+        case "Booked": return "Đã đặt";
+        case "Maintenance": return "Đang bảo trì";
+        case "Pending": return "Đang chờ";
+        case "Confirmed": return "Đã xác nhận";
+        case "Checked In": return "Đã nhận phòng";
+        case "Checked Out": return "Đã trả phòng";
+        case "Cancelled": return "Đã hủy";
+        default: return value;
+    }
+}
+private String viGender(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Male": return "Nam";
+        case "Female": return "Nữ";
+        case "Other": return "Khác";
+        default: return value;
+    }
+}
+private String viMessage(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Invalid Email": return "Email không tồn tại.";
+        case "Invalid Password": return "Mật khẩu không chính xác.";
+        case "Login Failed": return "Đăng nhập không thành công.";
+        case "Please Login as Admin": return "Vui lòng đăng nhập bằng tài khoản quản trị viên.";
+        case "Please Login First": return "Vui lòng đăng nhập trước.";
+        case "Please login to book a room.": return "Vui lòng đăng nhập để đặt phòng.";
+        case "Please Fill All Required Fields": return "Vui lòng điền đầy đủ các trường bắt buộc.";
+        case "Email Already Registered": return "Email này đã được đăng ký.";
+        case "Registration Failed": return "Đăng ký không thành công.";
+        case "Something Went Wrong": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Email not found.": return "Không tìm thấy email này.";
+        case "Something went wrong.": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Password updated successfully. Please login.": return "Cập nhật mật khẩu thành công. Vui lòng đăng nhập.";
+        case "Customer Not Found": return "Không tìm thấy khách hàng.";
+        case "Current Password is Incorrect": return "Mật khẩu hiện tại không đúng.";
+        case "New Password and Confirm Password do not match": return "Mật khẩu mới và mật khẩu xác nhận không khớp.";
+        case "Unable to Change Password": return "Không thể đổi mật khẩu.";
+        case "Password Changed Successfully": return "Đổi mật khẩu thành công.";
+        case "Room Added Successfully": return "Thêm phòng thành công.";
+        case "Room Updated Successfully": return "Cập nhật phòng thành công.";
+        case "Unable to Update Room": return "Không thể cập nhật phòng.";
+        default: return value;
+    }
+}
+%>
 
 <%
 if(session.getAttribute("customerId")==null){
@@ -23,7 +92,7 @@ int customerId=(Integer)session.getAttribute("customerId");
 
 <!DOCTYPE html>
 
-<html>
+<html lang="vi">
 
 <head>
 
@@ -32,11 +101,7 @@ int customerId=(Integer)session.getAttribute("customerId");
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>
-
-Book Room
-
-</title>
+<title>Đặt phòng</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
 rel="stylesheet">
@@ -131,7 +196,7 @@ class="room-image">
 
 <h2 class="gold">
 
-<%=room.getRoomType()%>
+<%=viRoomType(room.getRoomType())%>
 
 </h2>
 
@@ -139,7 +204,7 @@ class="room-image">
 
 <h4>
 
-Room Number :
+Số phòng:
 
 <%=room.getRoomNumber()%>
 
@@ -147,9 +212,9 @@ Room Number :
 
 <h4>
 
-Capacity :
+Sức chứa:
 
-<%=room.getCapacity()%> Guests
+<%=room.getCapacity()%> khách
 
 </h4>
 
@@ -161,7 +226,7 @@ Capacity :
 
 <div class="price">
 
-₹ <%=room.getPrice()%> / Night
+<%=String.format(java.util.Locale.forLanguageTag("vi-VN"), "%,.0f", room.getPrice())%> ₫ / đêm
 
 </div>
 
@@ -183,11 +248,7 @@ value="<%=room.getPrice()%>">
 
 <div class="mb-3">
 
-<label class="form-label">
-
-Check In
-
-</label>
+<label class="form-label">Nhận phòng</label>
 
 <input
 type="date"
@@ -200,11 +261,7 @@ required>
 
 <div class="mb-3">
 
-<label class="form-label">
-
-Check Out
-
-</label>
+<label class="form-label">Trả phòng</label>
 
 <input
 type="date"
@@ -217,11 +274,7 @@ required>
 
 <div class="mb-3">
 
-<label class="form-label">
-
-Guests
-
-</label>
+<label class="form-label">Số khách</label>
 
 <select
 class="form-select"
@@ -252,15 +305,11 @@ for(int i=1;i<=room.getCapacity();i++)
 
 <div class="d-flex justify-content-between">
 
-<h5>
-
-Price / Night
-
-</h5>
+<h5>Giá / đêm</h5>
 
 <h5>
 
-₹ <%=room.getPrice()%>
+<%=String.format(java.util.Locale.forLanguageTag("vi-VN"), "%,.0f", room.getPrice())%> ₫
 
 </h5>
 
@@ -270,11 +319,7 @@ Price / Night
 
 <div class="d-flex justify-content-between">
 
-<h5>
-
-Total Nights
-
-</h5>
+<h5>Tổng số đêm</h5>
 
 <h5 id="nights">
 
@@ -288,17 +333,13 @@ Total Nights
 
 <div class="d-flex justify-content-between">
 
-<h4 class="gold">
-
-Total Amount
-
-</h4>
+<h4 class="gold">Tổng tiền</h4>
 
 <h4
 class="gold"
 id="totalAmount">
 
-₹ 0
+0 ₫
 
 </h4>
 
@@ -315,11 +356,7 @@ id="hiddenTotal">
 
 <button
 type="submit"
-class="btn btn-warning btn-lg w-100">
-
-Confirm Booking
-
-</button>
+class="btn btn-warning btn-lg w-100">Xác nhận đặt phòng</button>
 
 </div>
 
@@ -358,7 +395,7 @@ if(checkIn.value=="" || checkOut.value=="")
 
 nights.innerHTML="0";
 
-total.innerHTML="₹ 0";
+total.innerHTML="0 ₫";
 
 hiddenTotal.value=0;
 
@@ -373,13 +410,13 @@ let outDate=new Date(checkOut.value);
 if(outDate<=inDate)
 {
 
-alert("Check-Out date must be after Check-In date.");
+alert("Ngày trả phòng phải sau ngày nhận phòng.");
 
 checkOut.value="";
 
 nights.innerHTML="0";
 
-total.innerHTML="₹ 0";
+total.innerHTML="0 ₫";
 
 hiddenTotal.value=0;
 
@@ -395,7 +432,7 @@ let amount=totalNights*price;
 
 nights.innerHTML=totalNights;
 
-total.innerHTML="₹ "+amount.toFixed(2);
+total.innerHTML=new Intl.NumberFormat("vi-VN").format(amount)+" ₫";
 
 hiddenTotal.value=amount;
 

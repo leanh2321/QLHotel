@@ -4,6 +4,7 @@
     Author     : Asus
 --%>
 
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 if(session.getAttribute("admin")==null){
 
@@ -23,13 +24,13 @@ int bookedRooms = totalRooms - availableRooms;
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 
 <head>
 
 <meta charset="UTF-8">
 
-<title>Admin Dashboard | Royal Virasat Hotel</title>
+<title>Bảng điều khiển quản trị | Khách sạn Royal Virasat</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -154,17 +155,13 @@ margin:3px;
 
 <h3>
 
-Welcome,
+Xin chào,
 
 <%=session.getAttribute("adminName")%>
 
 </h3>
 
-<p>
-
-Manage your hotel efficiently from this dashboard.
-
-</p>
+<p>Quản lý khách sạn hiệu quả từ trang tổng quan này.</p>
 
 </div>
 
@@ -182,7 +179,7 @@ Manage your hotel efficiently from this dashboard.
 
 <div class="number"><%=totalRooms%></div>
 
-<div class="title">Total Rooms</div>
+<div class="title">Tổng số phòng</div>
 
 </div>
 
@@ -198,7 +195,7 @@ Manage your hotel efficiently from this dashboard.
 
 <div class="number"><%=availableRooms%></div>
 
-<div class="title">Available Rooms</div>
+<div class="title">Phòng còn trống</div>
 
 </div>
 
@@ -214,7 +211,7 @@ Manage your hotel efficiently from this dashboard.
 
 <div class="number"><%=bookedRooms%></div>
 
-<div class="title">Booked Rooms</div>
+<div class="title">Phòng đã đặt</div>
 
 </div>
 
@@ -230,7 +227,7 @@ Manage your hotel efficiently from this dashboard.
 
 <div class="number"><%=totalCustomers%></div>
 
-<div class="title">Total Customers</div>
+<div class="title">Tổng số khách hàng</div>
 
 </div>
 
@@ -246,7 +243,7 @@ Manage your hotel efficiently from this dashboard.
 
 <div class="number"><%=totalBookings%></div>
 
-<div class="title">Total Bookings</div>
+<div class="title">Tổng số đặt phòng</div>
 
 </div>
 
@@ -261,25 +258,21 @@ Manage your hotel efficiently from this dashboard.
 <div class="card-body">
 
 <div class="number">
-<i class="fas fa-indian-rupee-sign"></i>
-<%=String.format("%.2f",totalRevenue)%>
+<i class="fas fa-money-bill-wave"></i>
+<%=String.format(java.util.Locale.forLanguageTag("vi-VN"), "%,.0f", totalRevenue)%> ₫
 </div>
 
-<div class="title">Total Revenue</div>
-
-</div>
-
-</div>
+<div class="title">Tổng doanh thu</div>
 
 </div>
 
 </div>
 
-<h3 class="mt-5 mb-4" style="color:#D4AF37;">
+</div>
 
-Quick Actions
+</div>
 
-</h3>
+<h3 class="mt-5 mb-4" style="color:#D4AF37;">Thao tác nhanh</h3>
 
 <div class="row g-4">
 
@@ -293,7 +286,7 @@ Quick Actions
 
 <h4><i class="fas fa-bed text-warning"></i></h4>
 
-<h5>Manage Rooms</h5>
+<h5>Quản lý phòng</h5>
 
 </div>
 
@@ -313,7 +306,7 @@ Quick Actions
 
 <h4><i class="fas fa-users text-primary"></i></h4>
 
-<h5>Customers</h5>
+<h5>Khách hàng</h5>
 
 </div>
 
@@ -333,7 +326,7 @@ Quick Actions
 
 <h4><i class="fas fa-calendar-check text-success"></i></h4>
 
-<h5>Manage Customers</h5>
+<h5>Quản lý đặt phòng</h5>
 
 </div>
 
@@ -345,7 +338,7 @@ Quick Actions
 
 <div class="col-md-3">
 
-<a href="reports.jsp" class="action-card">
+<a href="ReportsServlet" class="action-card">
 
 <div class="card">
 
@@ -353,7 +346,7 @@ Quick Actions
 
 <h4><i class="fas fa-chart-bar text-danger"></i></h4>
 
-<h5>Reports</h5>
+<h5>Báo cáo</h5>
 
 </div>
 
@@ -367,11 +360,7 @@ Quick Actions
 
 <div class="text-center mt-5">
 
-<a href="LogoutServlet" class="btn btn-danger btn-lg">
-
-Logout
-
-</a>
+<a href="LogoutServlet" class="btn btn-danger btn-lg">Đăng xuất</a>
 
 </div>
 
@@ -385,17 +374,9 @@ Logout
 
 <div class="col-md-6">
 
-<h5>
+<h5>Khách sạn Mường Thanh</h5>
 
-Royal Stay Hotel
-
-</h5>
-
-<p>
-
-Luxury Hotel Management System
-
-</p>
+<p>Hệ thống quản lý khách sạn cao cấp</p>
 
 </div>
 
@@ -403,15 +384,11 @@ Luxury Hotel Management System
 
 <p>
 
-� 2026 Royal Stay Hotel
+� 2026 Khách sạn Mường Thanh Sông Lam
 
 </p>
 
-<p>
-
-Designed by Siddharth Rathore
-
-</p>
+<p>Thiết kế bởi Lê Tuấn Anh</p>
 
 </div>
 

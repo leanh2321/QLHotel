@@ -1,8 +1,77 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@page import="dao.BookingDAO"%>
 <%@page import="dao.RoomDAO"%>
 <%@page import="model.Booking"%>
 <%@page import="model.Room"%>
+
+<%!
+private String viRoomType(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Single": return "Phòng đơn";
+        case "Double": return "Phòng đôi";
+        case "Standard": return "Phòng tiêu chuẩn";
+        case "Deluxe": return "Phòng Deluxe";
+        case "Suite": return "Phòng Suite";
+        case "Family": return "Phòng gia đình";
+        case "Executive": return "Phòng Executive";
+        case "Presidential": return "Phòng Tổng thống";
+        case "Honeymoon": return "Phòng trăng mật";
+        default: return value;
+    }
+}
+private String viRoomStatus(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Available": return "Còn trống";
+        case "Booked": return "Đã đặt";
+        case "Maintenance": return "Đang bảo trì";
+        case "Pending": return "Đang chờ";
+        case "Confirmed": return "Đã xác nhận";
+        case "Checked In": return "Đã nhận phòng";
+        case "Checked Out": return "Đã trả phòng";
+        case "Cancelled": return "Đã hủy";
+        default: return value;
+    }
+}
+private String viGender(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Male": return "Nam";
+        case "Female": return "Nữ";
+        case "Other": return "Khác";
+        default: return value;
+    }
+}
+private String viMessage(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Invalid Email": return "Email không tồn tại.";
+        case "Invalid Password": return "Mật khẩu không chính xác.";
+        case "Login Failed": return "Đăng nhập không thành công.";
+        case "Please Login as Admin": return "Vui lòng đăng nhập bằng tài khoản quản trị viên.";
+        case "Please Login First": return "Vui lòng đăng nhập trước.";
+        case "Please login to book a room.": return "Vui lòng đăng nhập để đặt phòng.";
+        case "Please Fill All Required Fields": return "Vui lòng điền đầy đủ các trường bắt buộc.";
+        case "Email Already Registered": return "Email này đã được đăng ký.";
+        case "Registration Failed": return "Đăng ký không thành công.";
+        case "Something Went Wrong": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Email not found.": return "Không tìm thấy email này.";
+        case "Something went wrong.": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Password updated successfully. Please login.": return "Cập nhật mật khẩu thành công. Vui lòng đăng nhập.";
+        case "Customer Not Found": return "Không tìm thấy khách hàng.";
+        case "Current Password is Incorrect": return "Mật khẩu hiện tại không đúng.";
+        case "New Password and Confirm Password do not match": return "Mật khẩu mới và mật khẩu xác nhận không khớp.";
+        case "Unable to Change Password": return "Không thể đổi mật khẩu.";
+        case "Password Changed Successfully": return "Đổi mật khẩu thành công.";
+        case "Room Added Successfully": return "Thêm phòng thành công.";
+        case "Room Updated Successfully": return "Cập nhật phòng thành công.";
+        case "Unable to Update Room": return "Không thể cập nhật phòng.";
+        default: return value;
+    }
+}
+%>
 
 <%
 if(session.getAttribute("customerId")==null){
@@ -25,7 +94,7 @@ Room room=roomDAO.getRoomById(booking.getRoomId());
 
 <!DOCTYPE html>
 
-<html>
+<html lang="vi">
 
 <head>
 
@@ -36,7 +105,7 @@ content="width=device-width, initial-scale=1.0">
 
 <title>
 
-Payment
+Thanh toán
 
 </title>
 
@@ -159,19 +228,11 @@ color:white;
 
 <div class="left-box">
 
-<h2 class="gold">
-
-Royal Virasat Hotel
-
-</h2>
+<h2 class="gold">Khách sạn Mường Thanh</h2>
 
 <hr>
 
-<h5>
-
-Booking ID
-
-</h5>
+<h5>Mã đặt phòng</h5>
 
 <p>
 
@@ -179,23 +240,15 @@ Booking ID
 
 </p>
 
-<h5>
-
-Room
-
-</h5>
+<h5>Phòng</h5>
 
 <p>
 
-<%=room.getRoomType()%>
+<%=viRoomType(room.getRoomType())%>
 
 </p>
 
-<h5>
-
-Room Number
-
-</h5>
+<h5>Số phòng</h5>
 
 <p>
 
@@ -203,11 +256,7 @@ Room Number
 
 </p>
 
-<h5>
-
-Check In
-
-</h5>
+<h5>Nhận phòng</h5>
 
 <p>
 
@@ -215,11 +264,7 @@ Check In
 
 </p>
 
-<h5>
-
-Check Out
-
-</h5>
+<h5>Trả phòng</h5>
 
 <p>
 
@@ -227,15 +272,11 @@ Check Out
 
 </p>
 
-<h5>
-
-Guests
-
-</h5>
+<h5>Số khách</h5>
 
 <p>
 
-<%=booking.getGuests()%>
+<%=booking.getGuests()%> khách
 
 </p>
 
@@ -243,15 +284,11 @@ Guests
 
 <div class="amount">
 
-₹ <%=booking.getTotalAmount()%>
+<%=String.format(java.util.Locale.forLanguageTag("vi-VN"), "%,.0f", booking.getTotalAmount())%> ₫
 
 </div>
 
-<p>
-
-Amount Payable
-
-</p>
+<p>Số tiền cần thanh toán</p>
 
 </div>
 
@@ -259,11 +296,7 @@ Amount Payable
 
 <div class="col-md-7">
 
-<h2 class="gold mb-4">
-
-Choose Payment Method
-
-</h2>
+<h2 class="gold mb-4">Chọn phương thức thanh toán</h2>
 
 <form
 action="ProcessPaymentServlet"
@@ -284,21 +317,13 @@ value="UPI"
 checked
 onclick="showMethod('upi')">
 
-<b>
-
-UPI Payment
-
-</b>
+<b>Thanh toán UPI</b>
 
 </div>
 
 <div id="upiBox" class="mb-4">
 
-<label>
-
-Select UPI App
-
-</label>
+<label>Chọn ứng dụng UPI</label>
 
 <select
 class="form-select"
@@ -312,7 +337,7 @@ Google Pay
 
 <option>
 
-PhonePe
+Điện thoạiPe
 
 </option>
 
@@ -340,11 +365,7 @@ name="paymentMethod"
 value="Card"
 onclick="showMethod('card')">
 
-<b>
-
-Credit / Debit Card
-
-</b>
+<b>Thẻ tín dụng / ghi nợ</b>
 
 </div>
 
@@ -354,11 +375,7 @@ style="display:none;">
 
 <div class="mb-3">
 
-<label>
-
-Card Number
-
-</label>
+<label>Số thẻ</label>
 
 <input
 type="text"
@@ -372,16 +389,12 @@ placeholder="1234 5678 9012 3456">
 
 <div class="col-md-8">
 
-<label>
-
-Card Holder
-
-</label>
+<label>Chủ thẻ</label>
 
 <input
 type="text"
 class="form-control"
-placeholder="Name on Card">
+placeholder="Tên in trên thẻ">
 
 </div>
 
@@ -427,11 +440,7 @@ name="paymentMethod"
 value="Net Banking"
 onclick="showMethod('bank')">
 
-<b>
-
-Net Banking
-
-</b>
+<b>Ngân hàng trực tuyến</b>
 
 </div>
 
@@ -440,43 +449,19 @@ id="bankBox"
 style="display:none;"
 class="mb-3">
 
-<label>
-
-Select Bank
-
-</label>
+<label>Chọn ngân hàng</label>
 
 <select class="form-select">
 
-<option>
+<option>Ngân hàng Tỉnh/Thành Bank of India</option>
 
-State Bank of India
+<option>Ngân hàng HDFC</option>
 
-</option>
+<option>Ngân hàng ICICI</option>
 
-<option>
+<option>Ngân hàng Axis</option>
 
-HDFC Bank
-
-</option>
-
-<option>
-
-ICICI Bank
-
-</option>
-
-<option>
-
-Axis Bank
-
-</option>
-
-<option>
-
-Punjab National Bank
-
-</option>
+<option>Ngân hàng Punjab National Bank</option>
 
 </select>
 
@@ -490,32 +475,20 @@ name="paymentMethod"
 value="Cash"
 onclick="showMethod('cash')">
 
-<b>
-
-Cash at Hotel
-
-</b>
+<b>Thanh toán tiền mặt tại khách sạn</b>
 
 </div>
 
 <div
 id="cashBox"
 style="display:none;"
-class="alert alert-warning">
-
-You can pay at the hotel reception during Check-In.
-
-</div>
+class="alert alert-warning">Bạn có thể thanh toán tại quầy lễ tân khi nhận phòng.</div>
 
 <div class="mt-4">
 
 <button
 type="submit"
-class="btn pay-btn">
-
-Pay Now
-
-</button>
+class="btn pay-btn">Thanh toán ngay</button>
 
 </div>
 
@@ -572,7 +545,7 @@ button.disabled=true;
 
 button.innerHTML=`
 <div class="spinner-border spinner-border-sm text-dark me-2"></div>
-Processing Payment...
+Đang xử lý thanh toán...
 `;
 
 setTimeout(function(){

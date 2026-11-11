@@ -1,7 +1,75 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Room"%>
+
+<%!
+private String viRoomType(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Single": return "Phòng đơn";
+        case "Double": return "Phòng đôi";
+        case "Standard": return "Phòng tiêu chuẩn";
+        case "Deluxe": return "Phòng Deluxe";
+        case "Suite": return "Phòng Suite";
+        case "Family": return "Phòng gia đình";
+        case "Executive": return "Phòng Executive";
+        case "Presidential": return "Phòng Tổng thống";
+        case "Honeymoon": return "Phòng trăng mật";
+        default: return value;
+    }
+}
+private String viRoomStatus(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Available": return "Còn trống";
+        case "Booked": return "Đã đặt";
+        case "Maintenance": return "Đang bảo trì";
+        case "Pending": return "Đang chờ";
+        case "Confirmed": return "Đã xác nhận";
+        case "Checked In": return "Đã nhận phòng";
+        case "Checked Out": return "Đã trả phòng";
+        case "Cancelled": return "Đã hủy";
+        default: return value;
+    }
+}
+private String viGender(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Male": return "Nam";
+        case "Female": return "Nữ";
+        case "Other": return "Khác";
+        default: return value;
+    }
+}
+private String viMessage(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Invalid Email": return "Email không tồn tại.";
+        case "Invalid Password": return "Mật khẩu không chính xác.";
+        case "Login Failed": return "Đăng nhập không thành công.";
+        case "Please Login as Admin": return "Vui lòng đăng nhập bằng tài khoản quản trị viên.";
+        case "Please Login First": return "Vui lòng đăng nhập trước.";
+        case "Please login to book a room.": return "Vui lòng đăng nhập để đặt phòng.";
+        case "Please Fill All Required Fields": return "Vui lòng điền đầy đủ các trường bắt buộc.";
+        case "Email Already Registered": return "Email này đã được đăng ký.";
+        case "Registration Failed": return "Đăng ký không thành công.";
+        case "Something Went Wrong": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Email not found.": return "Không tìm thấy email này.";
+        case "Something went wrong.": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Password updated successfully. Please login.": return "Cập nhật mật khẩu thành công. Vui lòng đăng nhập.";
+        case "Customer Not Found": return "Không tìm thấy khách hàng.";
+        case "Current Password is Incorrect": return "Mật khẩu hiện tại không đúng.";
+        case "New Password and Confirm Password do not match": return "Mật khẩu mới và mật khẩu xác nhận không khớp.";
+        case "Unable to Change Password": return "Không thể đổi mật khẩu.";
+        case "Password Changed Successfully": return "Đổi mật khẩu thành công.";
+        case "Room Added Successfully": return "Thêm phòng thành công.";
+        case "Room Updated Successfully": return "Cập nhật phòng thành công.";
+        case "Unable to Update Room": return "Không thể cập nhật phòng.";
+        default: return value;
+    }
+}
+%>
 
 <%
 if(session.getAttribute("admin")==null){
@@ -34,11 +102,7 @@ if(search==null){
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>
-
-Manage Rooms | Royal Virasat Hotel
-
-</title>
+<title>Quản lý phòng | Khách sạn Mường Thanh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
 rel="stylesheet">
@@ -164,11 +228,7 @@ color:white;
 
 <div class="container">
 
-<h2 class="heading">
-
-Manage Rooms
-
-</h2>
+<h2 class="heading">Quản lý phòng</h2>
 
 <div class="table-container">
 
@@ -186,17 +246,13 @@ name="search"
 
 class="form-control"
 
-placeholder="Search Room Number"
+placeholder="Tìm số phòng"
 
 value="<%=search%>">
 
 <button class="btn btn-dark">
 
-<i class="fa-solid fa-magnifying-glass"></i>
-
-Search
-
-</button>
+<i class="fa-solid fa-magnifying-glass"></i>Tìm kiếm</button>
 
 </div>
 
@@ -205,11 +261,7 @@ Search
 <a href="addroom.jsp"
 class="btn btn-add">
 
-<i class="fa-solid fa-plus"></i>
-
-Add New Room
-
-</a>
+<i class="fa-solid fa-plus"></i>Thêm phòng mới</a>
 
 </div>
 
@@ -219,23 +271,19 @@ Add New Room
 
 <tr>
 
-<th>Image</th>
+<th>Ảnh</th>
 
-<th>Room No.</th>
+<th>Số phòng</th>
 
-<th>Room Type</th>
+<th>Loại phòng</th>
 
-<th>Capacity</th>
+<th>Sức chứa</th>
 
-<th>Price</th>
+<th>Giá</th>
 
-<th>Status</th>
+<th>Trạng thái</th>
 
-<th width="170">
-
-Actions
-
-</th>
+<th width="170">Thao tác</th>
 
 </tr>
 
@@ -263,19 +311,19 @@ for(Room room : rooms){
 
 <td>
 
-<%=room.getRoomType()%>
+<%=viRoomType(room.getRoomType())%>
 
 </td>
 
 <td>
 
-<%=room.getCapacity()%> Persons
+<%=room.getCapacity()%> người
 
 </td>
 
 <td>
 
-₹ <%=String.format("%.2f", room.getPrice())%>
+<%=String.format(java.util.Locale.forLanguageTag("vi-VN"), "%,.0f", room.getPrice())%> ₫
 
 </td>
 
@@ -289,11 +337,7 @@ if(status.equalsIgnoreCase("Available")){
 
 %>
 
-<span class="badge-available">
-
-Available
-
-</span>
+<span class="badge-available">Còn trống</span>
 
 <%
 
@@ -302,11 +346,7 @@ else if(status.equalsIgnoreCase("Booked")){
 
 %>
 
-<span class="badge-booked">
-
-Booked
-
-</span>
+<span class="badge-booked">Đã đặt</span>
 
 <%
 
@@ -315,11 +355,7 @@ else{
 
 %>
 
-<span class="badge-maintenance">
-
-Maintenance
-
-</span>
+<span class="badge-maintenance">Đã hủy</span>
 
 <%
 
@@ -334,21 +370,13 @@ Maintenance
 <a href="EditRoomServlet?id=<%=room.getRoomId()%>"
 class="btn btn-success btn-sm">
 
-<i class="fa-solid fa-pen-to-square"></i>
-
-Edit
-
-</a>
+<i class="fa-solid fa-pen-to-square"></i>Sửa</a>
 
 <a href="DeleteRoomServlet?id=<%=room.getRoomId()%>"
 class="btn btn-danger btn-sm"
-onclick="return confirm('Delete this room?');">
+onclick="return confirm('Bạn có chắc muốn xóa phòng này?');">
 
-<i class="fa-solid fa-trash"></i>
-
-Delete
-
-</a>
+<i class="fa-solid fa-trash"></i>Xóa</a>
 
 </td>
 
@@ -365,11 +393,7 @@ if(rooms.isEmpty()){
 <tr>
 
 <td colspan="7"
-class="text-center text-danger fw-bold">
-
-No Rooms Found
-
-</td>
+class="text-center text-danger fw-bold">Không tìm thấy phòng nào</td>
 
 </tr>
 
@@ -395,17 +419,9 @@ No Rooms Found
 
 <div class="col-md-6">
 
-<h5>
+<h5>Khách sạn Mường Thanh Sông Lam</h5>
 
-Royal Virasat Hotel
-
-</h5>
-
-<p>
-
-Luxury Hotel Management System
-
-</p>
+<p>Hệ thống quản lý khách sạn cao cấp</p>
 
 </div>
 
@@ -413,15 +429,11 @@ Luxury Hotel Management System
 
 <p>
 
-© 2026 Royal Virasat Hotel
+© 2026 Khách sạn Mường Thanh Sông Lam
 
 </p>
 
-<p>
-
-Designed by Siddharth Rathore
-
-</p>
+<p>Thiết kế bởi Lê Tuấn Anh</p>
 
 </div>
 

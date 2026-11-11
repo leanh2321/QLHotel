@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background:#111;">
 
@@ -6,16 +6,10 @@
 
 <a class="navbar-brand fw-bold" href="AdminDashboardServlet">
 
-<img src="images/Gemini_Generated_Image_e9hnoce9hnoce9hn-removebg-preview.png"
+<img src="images/muong thanh.png"
 width="90"
 height="55"
-class="me-2">
-
-Royal Virasat Hotel
-
-<span style="font-size:14px;color:#D4AF37;">
-Admin Panel
-</span>
+class="me-2">Khách sạn Mường Thanh<span style="font-size:14px;color:#D4AF37;"> Trang quản trị</span>
 
 </a>
 
@@ -36,77 +30,56 @@ id="navbarNav">
 <li class="nav-item">
 
 <a class="nav-link"
-href="AdminDashboardServlet">
-
-Dashboard
-
-</a>
+href="AdminDashboardServlet">Tổng quan</a>
 
 </li>
 
 <li class="nav-item">
 
 <a class="nav-link"
-href="ManageRoomServlet">
-
-Rooms
-
-</a>
+href="ManageRoomServlet">Phòng nghỉ</a>
 
 </li>
 
 <li class="nav-item">
 
 <a class="nav-link"
-href="ManageCustomerServlet">
-
-Customers
-
-</a>
+href="ManageCustomerServlet">Khách hàng</a>
 
 </li>
 
 <li class="nav-item">
 
 <a class="nav-link"
-href="ManageBookingServlet">
-
-Bookings
-
-</a>
+href="ManageBookingServlet">Đặt phòng</a>
 
 </li>
 
 <li class="nav-item">
 
 <a class="nav-link"
-href="reports.jsp">
-
-Reports
-
-</a>
+href="ManageRestaurantReservationServlet">Đặt bàn</a>
 
 </li>
 
 <li class="nav-item">
 
 <a class="nav-link"
-href="profileadmin.jsp">
+href="ReportsServlet">Báo cáo</a>
 
-Profile
+</li>
 
-</a>
+<li class="nav-item">
+
+<a class="nav-link"
+href="profileadmin.jsp">Hồ sơ</a>
 
 </li>
 
 <li class="nav-item">
 
 <a class="btn btn-danger ms-3"
-href="LogoutServlet">
-
-Logout
-
-</a>
+href="LogoutServlet">Đăng xuất</a>
 
 </li>
 

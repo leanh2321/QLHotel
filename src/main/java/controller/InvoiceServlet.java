@@ -24,15 +24,31 @@ public class InvoiceServlet extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
+        if (request.getSession(false) == null
+                || request.getSession(false).getAttribute("admin") == null) {
+            response.sendRedirect("login.jsp?error=Please%20Login%20as%20Admin");
+            return;
+        }
+
+        String bookingIdParam = request.getParameter("bookingId");
+        if (bookingIdParam == null || bookingIdParam.trim().isEmpty()) {
+            response.sendRedirect("ManageBookingServlet?error=Invalid%20booking%20id");
+            return;
+        }
+
         try {
 
-            int bookingId =
-            Integer.parseInt(request.getParameter("bookingId"));
+            int bookingId = Integer.parseInt(bookingIdParam);
 
             BookingDAO bookingDAO = new BookingDAO();
 
             Booking booking =
             bookingDAO.getBookingById(bookingId);
+
+            if (booking == null) {
+                response.sendRedirect("ManageBookingServlet?error=Invoice%20data%20not%20found");
+                return;
+            }
 
             CustomerDAO customerDAO =
             new CustomerDAO();
@@ -41,12 +57,22 @@ public class InvoiceServlet extends HttpServlet {
             customerDAO.getCustomerById(
             booking.getCustomerId());
 
+            if (customer == null) {
+                response.sendRedirect("ManageBookingServlet?error=Invoice%20data%20not%20found");
+                return;
+            }
+
             RoomDAO roomDAO =
             new RoomDAO();
 
             Room room =
             roomDAO.getRoomById(
             booking.getRoomId());
+
+            if (room == null) {
+                response.sendRedirect("ManageBookingServlet?error=Invoice%20data%20not%20found");
+                return;
+            }
 
             request.setAttribute("booking", booking);
 
@@ -59,11 +85,14 @@ public class InvoiceServlet extends HttpServlet {
 
         }
 
+        catch (NumberFormatException e) {
+            response.sendRedirect("ManageBookingServlet?error=Invalid%20booking%20id");
+        }
         catch(Exception e){
 
             e.printStackTrace();
 
-            response.sendRedirect("CustomerDashboardServlet");
+            throw new ServletException("Unable to load invoice", e);
 
         }
 

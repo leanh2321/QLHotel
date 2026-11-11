@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="model.Customer"%>
 
 <%
@@ -11,14 +11,14 @@ if(customer == null){
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Edit Profile | Royal Virasat Hotel</title>
+<title>Chỉnh sửa hồ sơ | Khách sạn Mường Thanh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -81,11 +81,7 @@ label{
 
 <div class="profile-box">
 
-<h2 class="heading">
-
-Edit Profile
-
-</h2>
+<h2 class="heading">Chỉnh sửa hồ sơ</h2>
 
 <form action="UpdateProfileServlet" method="post">
 
@@ -98,7 +94,7 @@ value="<%=customer.getCustomerId()%>">
 
 <div class="col-md-6">
 
-<label>Full Name</label>
+<label>Họ và tên</label>
 
 <input
 type="text"
@@ -111,7 +107,7 @@ required>
 
 <div class="col-md-6">
 
-<label>Gender</label>
+<label>Giới tính</label>
 
 <select
 class="form-select"
@@ -119,25 +115,13 @@ name="gender"
 required>
 
 <option value="Male"
-<%=customer.getGender().equals("Male")?"selected":""%>>
-
-Male
-
-</option>
+<%=customer.getGender().equals("Male")?"selected":""%>>Nam</option>
 
 <option value="Female"
-<%=customer.getGender().equals("Female")?"selected":""%>>
-
-Female
-
-</option>
+<%=customer.getGender().equals("Female")?"selected":""%>>Nữ</option>
 
 <option value="Other"
-<%=customer.getGender().equals("Other")?"selected":""%>>
-
-Other
-
-</option>
+<%=customer.getGender().equals("Other")?"selected":""%>>Khác</option>
 
 </select>
 
@@ -145,7 +129,7 @@ Other
 
 <div class="col-md-6">
 
-<label>Date of Birth</label>
+<label>Ngày sinh</label>
 
 <input
 type="date"
@@ -157,7 +141,7 @@ value="<%=customer.getDob()%>">
 
 <div class="col-md-6">
 
-<label>Mobile Number</label>
+<label>Số điện thoại</label>
 
 <input
 type="text"
@@ -171,7 +155,7 @@ required>
 
 <div class="col-md-6">
 
-<label>Email Address</label>
+<label>Địa chỉ email</label>
 
 <input
 type="email"
@@ -183,7 +167,7 @@ readonly>
 
 <div class="col-md-6">
 
-<label>PIN Code</label>
+<label>Mã bưu chính</label>
 
 <input
 type="text"
@@ -196,7 +180,7 @@ value="<%=customer.getPincode()%>">
 
 <div class="col-md-6">
 
-<label>City</label>
+<label>Thành phố</label>
 
 <input
 type="text"
@@ -208,7 +192,7 @@ value="<%=customer.getCity()%>">
 
 <div class="col-md-6">
 
-<label>State</label>
+<label>Tỉnh/Thành</label>
 
 <input
 type="text"
@@ -220,7 +204,7 @@ value="<%=customer.getState()%>">
 
 <div class="col-12">
 
-<label>Address</label>
+<label>Địa chỉ</label>
 
 <textarea
 class="form-control"
@@ -233,19 +217,11 @@ name="address"><%=customer.getAddress()%></textarea>
 
 <button
 type="submit"
-class="btn btn-gold btn-lg">
-
-Update Profile
-
-</button>
+class="btn btn-gold btn-lg">Cập nhật hồ sơ</button>
 
 <a
 href="ProfileServlet"
-class="btn btn-secondary btn-lg ms-2">
-
-Cancel
-
-</a>
+class="btn btn-secondary btn-lg ms-2">Hủy</a>
 
 </div>
 

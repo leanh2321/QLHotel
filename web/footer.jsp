@@ -3,10 +3,10 @@
     Created on : 23 Jul 2026, 9:10:04 pm
     Author     : Asus
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 
 <link rel="stylesheet"
@@ -110,13 +110,13 @@ font-size:15px;
 
 <h3>
 
-Royal Virasat
+Mường Thanh Sông Lam
 
 </h3>
 
 <p>
 
-Experience luxury, comfort and elegance with world-class hospitality.
+Tận hưởng sự sang trọng, tiện nghi và tinh tế cùng dịch vụ hiếu khách đẳng cấp.
 
 </p>
 
@@ -138,35 +138,31 @@ Experience luxury, comfort and elegance with world-class hospitality.
 
 <h3>
 
-Quick Links
+Liên kết nhanh
 
 </h3>
 
-<a href="index.jsp">Home</a>
+<a href="index.jsp">Trang chủ</a>
 
-<a href="about.jsp">About</a>
+<a href="about.jsp">Giới thiệu</a>
 
-<a href="RoomServlet">Rooms</a>
+<a href="RoomServlet">Phòng nghỉ</a>
 
-<a href="gallery.jsp">Gallery</a>
+<a href="gallery.jsp">Thư viện ảnh</a>
 
-<a href="contact.jsp">Contact</a>
+<a href="contact.jsp">Liên hệ</a>
 
 </div>
 
 <div class="footer-box">
 
-<h3>
-
-Contact
-
-</h3>
+<h3>Liên hệ</h3>
 
 <p>
 
 <i class="fa-solid fa-location-dot"></i>
 
- Udaipur, Rajasthan
+ Vinh, Nghệ An
 
 </p>
 
@@ -174,7 +170,7 @@ Contact
 
 <i class="fa-solid fa-phone"></i>
 
- +91 9876543210
+ +84 859096539
 
 </p>
 
@@ -182,7 +178,7 @@ Contact
 
 <i class="fa-solid fa-envelope"></i>
 
- info@royalvirasat.com
+ letuananh06012003@gmail.com
 
 </p>
 
@@ -192,19 +188,19 @@ Contact
 
 <h3>
 
-Facilities
+Tiện ích
 
 </h3>
 
-<p>✔ Luxury Rooms</p>
+<p>✔ Phòng nghỉ sang trọng</p>
 
-<p>✔ Swimming Pool</p>
+<p>✔ Hồ bơi</p>
 
-<p>✔ Spa & Wellness</p>
+<p>✔ Spa và chăm sóc sức khỏe</p>
 
-<p>✔ Free Wi-Fi</p>
+<p>✔ Wi-Fi miễn phí</p>
 
-<p>✔ Restaurant</p>
+<p>✔ Nhà hàng</p>
 
 </div>
 
@@ -212,7 +208,7 @@ Facilities
 
 <div class="bottom">
 
-© 2026 Royal Virasat | All Rights Reserved
+Bản quyền thuốc về Lê Tuấn Anh
 
 </div>
 

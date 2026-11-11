@@ -4,8 +4,77 @@
     Author     : Asus
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@page import="model.Customer"%>
+
+<%!
+private String viRoomType(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Single": return "Phòng đơn";
+        case "Double": return "Phòng đôi";
+        case "Standard": return "Phòng tiêu chuẩn";
+        case "Deluxe": return "Phòng Deluxe";
+        case "Suite": return "Phòng Suite";
+        case "Family": return "Phòng gia đình";
+        case "Executive": return "Phòng Executive";
+        case "Presidential": return "Phòng Tổng thống";
+        case "Honeymoon": return "Phòng trăng mật";
+        default: return value;
+    }
+}
+private String viRoomStatus(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Available": return "Còn trống";
+        case "Booked": return "Đã đặt";
+        case "Maintenance": return "Đang bảo trì";
+        case "Pending": return "Đang chờ";
+        case "Confirmed": return "Đã xác nhận";
+        case "Checked In": return "Đã nhận phòng";
+        case "Checked Out": return "Đã trả phòng";
+        case "Cancelled": return "Đã hủy";
+        default: return value;
+    }
+}
+private String viGender(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Male": return "Nam";
+        case "Female": return "Nữ";
+        case "Other": return "Khác";
+        default: return value;
+    }
+}
+private String viMessage(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Invalid Email": return "Email không tồn tại.";
+        case "Invalid Password": return "Mật khẩu không chính xác.";
+        case "Login Failed": return "Đăng nhập không thành công.";
+        case "Please Login as Admin": return "Vui lòng đăng nhập bằng tài khoản quản trị viên.";
+        case "Please Login First": return "Vui lòng đăng nhập trước.";
+        case "Please login to book a room.": return "Vui lòng đăng nhập để đặt phòng.";
+        case "Please Fill All Required Fields": return "Vui lòng điền đầy đủ các trường bắt buộc.";
+        case "Email Already Registered": return "Email này đã được đăng ký.";
+        case "Registration Failed": return "Đăng ký không thành công.";
+        case "Something Went Wrong": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Email not found.": return "Không tìm thấy email này.";
+        case "Something went wrong.": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Password updated successfully. Please login.": return "Cập nhật mật khẩu thành công. Vui lòng đăng nhập.";
+        case "Customer Not Found": return "Không tìm thấy khách hàng.";
+        case "Current Password is Incorrect": return "Mật khẩu hiện tại không đúng.";
+        case "New Password and Confirm Password do not match": return "Mật khẩu mới và mật khẩu xác nhận không khớp.";
+        case "Unable to Change Password": return "Không thể đổi mật khẩu.";
+        case "Password Changed Successfully": return "Đổi mật khẩu thành công.";
+        case "Room Added Successfully": return "Thêm phòng thành công.";
+        case "Room Updated Successfully": return "Cập nhật phòng thành công.";
+        case "Unable to Update Room": return "Không thể cập nhật phòng.";
+        default: return value;
+    }
+}
+%>
 
 <%
 Customer customer = (Customer) request.getAttribute("customer");
@@ -18,17 +87,13 @@ if(customer == null){
 
 <!DOCTYPE html>
 
-<html>
+<html lang="vi">
 
 <head>
 
 <meta charset="UTF-8">
 
-<title>
-
-My Profile
-
-</title>
+<title>Hồ sơ của tôi</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -122,21 +187,13 @@ font-weight:bold;
 
 <div class="profile-box">
 
-<h2 class="heading">
-
-My Profile
-
-</h2>
+<h2 class="heading">Hồ sơ của tôi</h2>
 
 <table class="table table-bordered">
 
 <tr>
 
-<td class="label">
-
-Customer ID
-
-</td>
+<td class="label">Mã khách hàng</td>
 
 <td>
 
@@ -148,11 +205,7 @@ Customer ID
 
 <tr>
 
-<td class="label">
-
-Full Name
-
-</td>
+<td class="label">Họ và tên</td>
 
 <td>
 
@@ -164,15 +217,11 @@ Full Name
 
 <tr>
 
-<td class="label">
-
-Gender
-
-</td>
+<td class="label">Giới tính</td>
 
 <td>
 
-<%=customer.getGender()%>
+<%=viGender(customer.getGender())%>
 
 </td>
 
@@ -180,11 +229,7 @@ Gender
 
 <tr>
 
-<td class="label">
-
-Date of Birth
-
-</td>
+<td class="label">Ngày sinh</td>
 
 <td>
 
@@ -196,11 +241,7 @@ Date of Birth
 
 <tr>
 
-<td class="label">
-
-Mobile Number
-
-</td>
+<td class="label">Số điện thoại</td>
 
 <td>
 
@@ -212,11 +253,7 @@ Mobile Number
 
 <tr>
 
-<td class="label">
-
-Email Address
-
-</td>
+<td class="label">Địa chỉ email</td>
 
 <td>
 
@@ -228,11 +265,7 @@ Email Address
 
 <tr>
 
-<td class="label">
-
-Address
-
-</td>
+<td class="label">Địa chỉ</td>
 
 <td>
 
@@ -244,11 +277,7 @@ Address
 
 <tr>
 
-<td class="label">
-
-City
-
-</td>
+<td class="label">Thành phố</td>
 
 <td>
 
@@ -260,11 +289,7 @@ City
 
 <tr>
 
-<td class="label">
-
-State
-
-</td>
+<td class="label">Tỉnh/Thành</td>
 
 <td>
 
@@ -276,11 +301,7 @@ State
 
 <tr>
 
-<td class="label">
-
-PIN Code
-
-</td>
+<td class="label">Mã bưu chính</td>
 
 <td>
 
@@ -296,27 +317,15 @@ PIN Code
 
 <a
 href="EditProfileServlet"
-class="btn btn-gold me-2">
-
-Edit Profile
-
-</a>
+class="btn btn-gold me-2">Chỉnh sửa hồ sơ</a>
 
 <a
 href="changepassword.jsp"
-class="btn btn-dark me-2">
-
-Change Password
-
-</a>
+class="btn btn-dark me-2">Đổi mật khẩu</a>
 
 <a
 href="CustomerDashboardServlet"
-class="btn btn-secondary">
-
-Back to Dashboard
-
-</a>
+class="btn btn-secondary">Về trang tổng quan</a>
 
 </div>
 

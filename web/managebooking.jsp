@@ -1,7 +1,75 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Booking"%>
+
+<%!
+private String viRoomType(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Single": return "Phòng đơn";
+        case "Double": return "Phòng đôi";
+        case "Standard": return "Phòng tiêu chuẩn";
+        case "Deluxe": return "Phòng Deluxe";
+        case "Suite": return "Phòng Suite";
+        case "Family": return "Phòng gia đình";
+        case "Executive": return "Phòng Executive";
+        case "Presidential": return "Phòng Tổng thống";
+        case "Honeymoon": return "Phòng trăng mật";
+        default: return value;
+    }
+}
+private String viRoomStatus(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Available": return "Còn trống";
+        case "Booked": return "Đã đặt";
+        case "Maintenance": return "Đang bảo trì";
+        case "Pending": return "Đang chờ";
+        case "Confirmed": return "Đã xác nhận";
+        case "Checked In": return "Đã nhận phòng";
+        case "Checked Out": return "Đã trả phòng";
+        case "Cancelled": return "Đã hủy";
+        default: return value;
+    }
+}
+private String viGender(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Male": return "Nam";
+        case "Female": return "Nữ";
+        case "Other": return "Khác";
+        default: return value;
+    }
+}
+private String viMessage(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Invalid Email": return "Email không tồn tại.";
+        case "Invalid Password": return "Mật khẩu không chính xác.";
+        case "Login Failed": return "Đăng nhập không thành công.";
+        case "Please Login as Admin": return "Vui lòng đăng nhập bằng tài khoản quản trị viên.";
+        case "Please Login First": return "Vui lòng đăng nhập trước.";
+        case "Please login to book a room.": return "Vui lòng đăng nhập để đặt phòng.";
+        case "Please Fill All Required Fields": return "Vui lòng điền đầy đủ các trường bắt buộc.";
+        case "Email Already Registered": return "Email này đã được đăng ký.";
+        case "Registration Failed": return "Đăng ký không thành công.";
+        case "Something Went Wrong": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Email not found.": return "Không tìm thấy email này.";
+        case "Something went wrong.": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Password updated successfully. Please login.": return "Cập nhật mật khẩu thành công. Vui lòng đăng nhập.";
+        case "Customer Not Found": return "Không tìm thấy khách hàng.";
+        case "Current Password is Incorrect": return "Mật khẩu hiện tại không đúng.";
+        case "New Password and Confirm Password do not match": return "Mật khẩu mới và mật khẩu xác nhận không khớp.";
+        case "Unable to Change Password": return "Không thể đổi mật khẩu.";
+        case "Password Changed Successfully": return "Đổi mật khẩu thành công.";
+        case "Room Added Successfully": return "Thêm phòng thành công.";
+        case "Room Updated Successfully": return "Cập nhật phòng thành công.";
+        case "Unable to Update Room": return "Không thể cập nhật phòng.";
+        default: return value;
+    }
+}
+%>
 
 <%
 if(session.getAttribute("admin")==null){
@@ -25,15 +93,11 @@ if(search==null){
 
 <!DOCTYPE html>
 
-<html>
+<html lang="vi">
 
 <head>
 
-<title>
-
-Manage Bookings
-
-</title>
+<title>Quản lý đặt phòng</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
 rel="stylesheet">
@@ -149,11 +213,7 @@ color:white;
 
 <div class="container container-box">
 
-<h2>
-
-Manage Bookings
-
-</h2>
+<h2>Quản lý đặt phòng</h2>
 
 <%
 
@@ -166,7 +226,7 @@ if(success!=null){
 
 <div class="alert alert-success">
 
-<%=success%>
+<%=viMessage(success)%>
 
 </div>
 
@@ -178,7 +238,7 @@ if(error!=null){
 
 <div class="alert alert-danger">
 
-<%=error%>
+<%=viMessage(error)%>
 
 </div>
 
@@ -200,7 +260,7 @@ name="search"
 
 class="form-control"
 
-placeholder="Search Customer / Email / Room Number"
+placeholder="Tìm khách hàng / email / số phòng"
 
 value="<%=search%>">
 
@@ -210,11 +270,7 @@ value="<%=search%>">
 
 <button class="btn btn-dark w-100">
 
-<i class="fa-solid fa-magnifying-glass"></i>
-
-Search
-
-</button>
+<i class="fa-solid fa-magnifying-glass"></i>Tìm kiếm</button>
 
 </div>
 
@@ -228,29 +284,29 @@ Search
 
 <tr>
 
-<th>Booking ID</th>
+<th>Mã đặt phòng</th>
 
-<th>Customer</th>
+<th>Khách hàng</th>
 
-<th>Mobile</th>
+<th>Điện thoại</th>
 
 <th>Email</th>
 
-<th>Room No.</th>
+<th>Số phòng</th>
 
-<th>Room Type</th>
+<th>Loại phòng</th>
 
-<th>Check In</th>
+<th>Nhận phòng</th>
 
-<th>Check Out</th>
+<th>Trả phòng</th>
 
-<th>Guests</th>
+<th>Số khách</th>
 
-<th>Total Amount</th>
+<th>Tổng tiền</th>
 
-<th>Status</th>
+<th>Trạng thái</th>
 
-<th>Action</th>
+<th>Thao tác</th>
 
 </tr>
 
@@ -276,17 +332,17 @@ String status = booking.getBookingStatus();
 
 <td><%=booking.getRoomNumber()%></td>
 
-<td><%=booking.getRoomType()%></td>
+<td><%=viRoomType(booking.getRoomType())%></td>
 
 <td><%=booking.getCheckIn()%></td>
 
 <td><%=booking.getCheckOut()%></td>
 
-<td><%=booking.getGuests()%></td>
+<td><%=booking.getGuests()%> khách</td>
 
 <td>
 
-₹ <%=String.format("%.2f", booking.getTotalAmount())%>
+<%=String.format(java.util.Locale.forLanguageTag("vi-VN"), "%,.0f", booking.getTotalAmount())%> ₫
 
 </td>
 
@@ -298,11 +354,7 @@ if(status.equalsIgnoreCase("Pending")){
 
 %>
 
-<span class="pending">
-
-Pending
-
-</span>
+<span class="pending">Đang chờ</span>
 
 <%
 
@@ -310,11 +362,7 @@ Pending
 
 %>
 
-<span class="confirmed">
-
-Confirmed
-
-</span>
+<span class="confirmed">Đã xác nhận</span>
 
 <%
 
@@ -322,11 +370,7 @@ Confirmed
 
 %>
 
-<span class="checkedin">
-
-Checked In
-
-</span>
+<span class="checkedin">Đã nhận phòng</span>
 
 <%
 
@@ -334,11 +378,7 @@ Checked In
 
 %>
 
-<span class="checkedout">
-
-Checked Out
-
-</span>
+<span class="checkedout">Đã trả phòng</span>
 
 <%
 
@@ -346,11 +386,7 @@ Checked Out
 
 %>
 
-<span class="cancelled">
-
-Cancelled
-
-</span>
+<span class="cancelled">Đã hủy</span>
 
 <%
 
@@ -369,18 +405,10 @@ if(status.equalsIgnoreCase("Pending")){
 %>
 
 <a href="ApproveBookingServlet?id=<%=booking.getBookingId()%>"
-class="btn btn-success btn-sm">
-
-Approve
-
-</a>
+class="btn btn-success btn-sm">Duyệt</a>
 
 <a href="RejectBookingServlet?id=<%=booking.getBookingId()%>"
-class="btn btn-danger btn-sm">
-
-Reject
-
-</a>
+class="btn btn-danger btn-sm">Từ chối</a>
 
 <%
 
@@ -389,18 +417,10 @@ Reject
 %>
 
 <a href="CheckInServlet?id=<%=booking.getBookingId()%>"
-class="btn btn-primary btn-sm">
-
-Check In
-
-</a>
+class="btn btn-primary btn-sm">Nhận phòng</a>
 
 <a href="RejectBookingServlet?id=<%=booking.getBookingId()%>"
-class="btn btn-danger btn-sm">
-
-Cancel
-
-</a>
+class="btn btn-danger btn-sm">Hủy</a>
 
 <%
 
@@ -409,11 +429,7 @@ Cancel
 %>
 
 <a href="CheckOutServlet?id=<%=booking.getBookingId()%>"
-class="btn btn-warning btn-sm">
-
-Check Out
-
-</a>
+class="btn btn-warning btn-sm">Trả phòng</a>
 
 <%
 
@@ -421,12 +437,8 @@ Check Out
 
 %>
 
-<a href="invoice.jsp?id=<%=booking.getBookingId()%>"
-class="btn btn-dark btn-sm">
-
-Invoice
-
-</a>
+<a href="InvoiceServlet?bookingId=<%=booking.getBookingId()%>"
+class="btn btn-dark btn-sm">Hóa đơn</a>
 
 <%
 
@@ -456,11 +468,7 @@ if(bookings.isEmpty()){
 
 <tr>
 
-<td colspan="12" class="text-center text-danger fw-bold">
-
-No Bookings Found
-
-</td>
+<td colspan="12" class="text-center text-danger fw-bold">Không tìm thấy đặt phòng nào</td>
 
 </tr>
 

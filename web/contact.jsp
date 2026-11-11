@@ -3,15 +3,15 @@
     Created on : 23 Jul 2026, 8:57:49 pm
     Author     : Asus
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 
 <meta charset="UTF-8">
 
-<title>Contact Us | Royal Virasat Hotel</title>
+<title>Liên hệ | Khách sạn Mường Thanh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -31,7 +31,7 @@ body{
 
 height:300px;
 
-background:url("images/contact1.jpg");
+background:url("images/metropole2.jpg");
 
 background-size:cover;
 background-position:center;
@@ -71,7 +71,7 @@ letter-spacing:3px;
 
 }
 
-/************ Contact ************/
+/************ Liên hệ ************/
 
 .contact{
 
@@ -237,7 +237,7 @@ margin:0;
 
 <div class="banner">
 
-<h1>CONTACT US</h1>
+<h1>LIÊN HỆ</h1>
 
 </div>
 <%
@@ -249,7 +249,7 @@ if(msg!=null)
 
 <div class="success-box">
 
-<h3>✔ Thank You!</h3>
+<h3>✔ Cảm ơn bạn!</h3>
 
 <p><%=msg%></p>
 
@@ -267,21 +267,17 @@ if(msg!=null)
 
 <div class="info">
 
-<h2>Royal Virasat Hotel</h2>
+<h2>Khách sạn Mường Thanh Sông Lamt</h2>
 
 <p>
 
-<i class="fa-solid fa-location-dot"></i>
-
-Lake City Road, Udaipur, Rajasthan
-
-</p>
+<i class="fa-solid fa-location-dot"></i>Đường Quang Trung, Thành phố Vinh, Nghệ An</p>
 
 <p>
 
 <i class="fa-solid fa-phone"></i>
 
-+91 9876543210
++84 869096539
 
 </p>
 
@@ -289,25 +285,17 @@ Lake City Road, Udaipur, Rajasthan
 
 <i class="fa-solid fa-envelope"></i>
 
-info@royalvirasat.com
+letuananh06012003@gmail.com
 
 </p>
 
 <p>
 
-<i class="fa-solid fa-clock"></i>
-
-24 × 7 Reception
-
-</p>
+<i class="fa-solid fa-clock"></i>Lễ tân phục vụ 24/7</p>
 
 <hr>
 
-<h4 style="color:#D4AF37;">
-
-Follow Us
-
-</h4>
+<h4 style="color:#D4AF37;">Theo dõi chúng tôi</h4>
 
 <div class="social">
 
@@ -329,11 +317,19 @@ Follow Us
 
 <div class="form-box">
 
-<h2>Send Us A Message</h2>
+<h2>Gửi lời nhắn cho chúng tôi</h2>
 
-<form action="savecontact.jsp" method="post">
+<% if ("1".equals(request.getParameter("sent"))) { %>
+<div class="alert alert-success" role="alert">Lời nhắn của bạn đã được gửi thành công.</div>
+<% } else if ("missing".equals(request.getParameter("error"))) { %>
+<div class="alert alert-warning" role="alert">Vui lòng điền đầy đủ các trường.</div>
+<% } else if ("save".equals(request.getParameter("error"))) { %>
+<div class="alert alert-danger" role="alert">Không lưu được lời nhắn. Hãy kiểm tra kết nối MySQL và bảng contact_message.</div>
+<% } %>
 
-<label>Full Name</label>
+<form action="<%=request.getContextPath()%>/SaveContactServlet" method="post">
+
+<label>Họ và tên</label>
 
 <input
 type="text"
@@ -341,7 +337,7 @@ name="name"
 class="form-control"
 required>
 
-<label>Mobile Number</label>
+<label>Số điện thoại</label>
 
 <input
 type="text"
@@ -350,7 +346,7 @@ class="form-control"
 maxlength="10"
 required>
 
-<label>Email Address</label>
+<label>Địa chỉ email</label>
 
 <input
 type="email"
@@ -358,7 +354,7 @@ name="email"
 class="form-control"
 required>
 
-<label>Your Message</label>
+<label>Lời nhắn của bạn</label>
 
 <textarea
 name="message"
@@ -368,11 +364,7 @@ required></textarea>
 
 <button
 type="submit"
-class="btn btn-send">
-
-Send Message
-
-</button>
+class="btn btn-send">Gửi lời nhắn</button>
 
 </form>
 
@@ -386,7 +378,7 @@ Send Message
 
 <iframe
 
-src="https://www.google.com/maps?q=Udaipur,Rajasthan&output=embed"
+src="https://www.google.com/maps?q=Vinh%2C+Nghe+An%2C+Vietnam&output=embed"
 
 width="100%"
 

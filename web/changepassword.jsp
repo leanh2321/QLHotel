@@ -1,4 +1,72 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%!
+private String viRoomType(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Single": return "Phòng đơn";
+        case "Double": return "Phòng đôi";
+        case "Standard": return "Phòng tiêu chuẩn";
+        case "Deluxe": return "Phòng Deluxe";
+        case "Suite": return "Phòng Suite";
+        case "Family": return "Phòng gia đình";
+        case "Executive": return "Phòng Executive";
+        case "Presidential": return "Phòng Tổng thống";
+        case "Honeymoon": return "Phòng trăng mật";
+        default: return value;
+    }
+}
+private String viRoomStatus(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Available": return "Còn trống";
+        case "Booked": return "Đã đặt";
+        case "Maintenance": return "Đang bảo trì";
+        case "Pending": return "Đang chờ";
+        case "Confirmed": return "Đã xác nhận";
+        case "Checked In": return "Đã nhận phòng";
+        case "Checked Out": return "Đã trả phòng";
+        case "Cancelled": return "Đã hủy";
+        default: return value;
+    }
+}
+private String viGender(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Male": return "Nam";
+        case "Female": return "Nữ";
+        case "Other": return "Khác";
+        default: return value;
+    }
+}
+private String viMessage(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Invalid Email": return "Email không tồn tại.";
+        case "Invalid Password": return "Mật khẩu không chính xác.";
+        case "Login Failed": return "Đăng nhập không thành công.";
+        case "Please Login as Admin": return "Vui lòng đăng nhập bằng tài khoản quản trị viên.";
+        case "Please Login First": return "Vui lòng đăng nhập trước.";
+        case "Please login to book a room.": return "Vui lòng đăng nhập để đặt phòng.";
+        case "Please Fill All Required Fields": return "Vui lòng điền đầy đủ các trường bắt buộc.";
+        case "Email Already Registered": return "Email này đã được đăng ký.";
+        case "Registration Failed": return "Đăng ký không thành công.";
+        case "Something Went Wrong": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Email not found.": return "Không tìm thấy email này.";
+        case "Something went wrong.": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Password updated successfully. Please login.": return "Cập nhật mật khẩu thành công. Vui lòng đăng nhập.";
+        case "Customer Not Found": return "Không tìm thấy khách hàng.";
+        case "Current Password is Incorrect": return "Mật khẩu hiện tại không đúng.";
+        case "New Password and Confirm Password do not match": return "Mật khẩu mới và mật khẩu xác nhận không khớp.";
+        case "Unable to Change Password": return "Không thể đổi mật khẩu.";
+        case "Password Changed Successfully": return "Đổi mật khẩu thành công.";
+        case "Room Added Successfully": return "Thêm phòng thành công.";
+        case "Room Updated Successfully": return "Cập nhật phòng thành công.";
+        case "Unable to Update Room": return "Không thể cập nhật phòng.";
+        default: return value;
+    }
+}
+%>
 
 <%
 if(session.getAttribute("customerId")==null){
@@ -15,7 +83,7 @@ if(session.getAttribute("customerId")==null){
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Change Password | Royal Virasat Hotel</title>
+<title>Đổi mật khẩu | Khách sạn Royal Virasat</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -94,11 +162,7 @@ font-size:14px;
 
 <div class="password-box">
 
-<h2 class="heading">
-
-Change Password
-
-</h2>
+<h2 class="heading">Đổi mật khẩu</h2>
 
 <%
 
@@ -110,7 +174,7 @@ if(error!=null){
 
 <div class="alert alert-danger">
 
-<%=error%>
+<%=viMessage(error)%>
 
 </div>
 
@@ -126,7 +190,7 @@ if(success!=null){
 
 <div class="alert alert-success">
 
-<%=success%>
+<%=viMessage(success)%>
 
 </div>
 
@@ -138,11 +202,7 @@ if(success!=null){
 
 <form action="ChangePasswordServlet" method="post">
 
-<label>
-
-Current Password
-
-</label>
+<label>Mật khẩu hiện tại</label>
 
 <input
 type="password"
@@ -150,11 +210,7 @@ class="form-control"
 name="oldPassword"
 required>
 
-<label>
-
-New Password
-
-</label>
+<label>Mật khẩu mới</label>
 
 <input
 type="password"
@@ -162,11 +218,7 @@ class="form-control"
 name="newPassword"
 required>
 
-<label>
-
-Confirm Password
-
-</label>
+<label>Xác nhận mật khẩu</label>
 
 <input
 type="password"
@@ -178,19 +230,11 @@ required>
 
 <button
 type="submit"
-class="btn btn-gold btn-lg">
-
-Update Password
-
-</button>
+class="btn btn-gold btn-lg">Cập nhật mật khẩu</button>
 
 <a
 href="ProfileServlet"
-class="btn btn-secondary btn-lg ms-2">
-
-Cancel
-
-</a>
+class="btn btn-secondary btn-lg ms-2">Hủy</a>
 
 </div>
 

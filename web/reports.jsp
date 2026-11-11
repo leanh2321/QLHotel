@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
 if(session.getAttribute("admin")==null){
@@ -23,17 +23,13 @@ double occupancy=(Double)request.getAttribute("occupancy");
 
 <!DOCTYPE html>
 
-<html>
+<html lang="vi">
 
 <head>
 
 <meta charset="UTF-8">
 
-<title>
-
-Reports
-
-</title>
+<title>Báo cáo</title>
 
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
@@ -150,11 +146,7 @@ font-weight:bold;
 
 <div class="container">
 
-<h2 class="report-title">
-
-Hotel Reports
-
-</h2>
+<h2 class="report-title">Báo cáo khách sạn</h2>
 
 <div class="row g-4">
     
@@ -172,11 +164,7 @@ Hotel Reports
 
 </h2>
 
-<p>
-
-Total Rooms
-
-</p>
+<p>Tổng số phòng</p>
 
 </div>
 
@@ -198,11 +186,7 @@ Total Rooms
 
 </h2>
 
-<p>
-
-Available Rooms
-
-</p>
+<p>Phòng còn trống</p>
 
 </div>
 
@@ -224,11 +208,7 @@ Available Rooms
 
 </h2>
 
-<p>
-
-Total Bookings
-
-</p>
+<p>Tổng số đặt phòng</p>
 
 </div>
 
@@ -250,11 +230,7 @@ Total Bookings
 
 </h2>
 
-<p>
-
-Customers
-
-</p>
+<p>Khách hàng</p>
 
 </div>
 
@@ -268,19 +244,15 @@ Customers
 
 <div class="card-body">
 
-<i class="fa-solid fa-indian-rupee-sign"></i>
+<i class="fa-solid fa-money-bill-wave"></i>
 
 <h2>
 
-₹ <%=String.format("%.2f",totalRevenue)%>
+<%=String.format(java.util.Locale.forLanguageTag("vi-VN"), "%,.0f", totalRevenue)%> ₫
 
 </h2>
 
-<p>
-
-Revenue
-
-</p>
+<p>Doanh thu</p>
 
 </div>
 
@@ -302,11 +274,7 @@ Revenue
 
 </h2>
 
-<p>
-
-Confirmed
-
-</p>
+<p>Đã xác nhận</p>
 
 </div>
 
@@ -328,11 +296,7 @@ Confirmed
 
 </h2>
 
-<p>
-
-Cancelled
-
-</p>
+<p>Đã hủy</p>
 
 </div>
 
@@ -354,11 +318,7 @@ Cancelled
 
 </h2>
 
-<p>
-
-Occupancy
-
-</p>
+<p>Công suất phòng</p>
 
 </div>
 
@@ -370,11 +330,7 @@ Occupancy
 
 <div class="chart-card">
 
-<h4 class="mb-4">
-
-Room Occupancy
-
-</h4>
+<h4 class="mb-4">Tình trạng sử dụng phòng</h4>
 
 <div class="progress">
 
@@ -397,11 +353,7 @@ style="width:<%=occupancy%>%">
 
 <div class="chart-card">
 
-<h4 class="mb-3">
-
-Room Status
-
-</h4>
+<h4 class="mb-3">Trạng thái phòng</h4>
 
 <canvas id="roomChart"></canvas>
 
@@ -413,11 +365,7 @@ Room Status
 
 <div class="chart-card">
 
-<h4 class="mb-3">
-
-Booking Status
-
-</h4>
+<h4 class="mb-3">Trạng thái đặt phòng</h4>
 
 <canvas id="bookingChart"></canvas>
 
@@ -436,7 +384,7 @@ new Chart(document.getElementById("roomChart"), {
 
     data: {
 
-        labels: ['Available','Booked'],
+        labels: ['Còn trống','Đã đặt'],
 
         datasets: [{
 
@@ -469,7 +417,7 @@ new Chart(document.getElementById("bookingChart"), {
 
     data: {
 
-        labels: ['Confirmed','Cancelled'],
+        labels: ['Đã xác nhận','Đã hủy'],
 
         datasets: [{
 
@@ -497,11 +445,7 @@ new Chart(document.getElementById("bookingChart"), {
 
 </script>
 
-<footer class="mt-5 bg-dark text-white text-center p-3">
-
-Royal Virasat Hotel — Reports Dashboard © 2026
-
-</footer>
+<footer class="mt-5 bg-dark text-white text-center p-3">Khách sạn Mường Thanh Sông Lam — Bảng báo cáo © 2026</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 

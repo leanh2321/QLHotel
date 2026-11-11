@@ -4,7 +4,7 @@
     Author     : Asus
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gallery | Royal Virasat Hotel</title>
+<title>Thư viện ảnh | Khách sạn Mường Thanh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -130,23 +130,15 @@ body{
 
 <div class="banner">
 
-<h1>Our Gallery</h1>
+<h1>Thư viện ảnh</h1>
 
 </div>
 
 <div class="container">
 
-<h2 class="heading">
+<h2 class="heading">Trải nghiệm đẳng cấp</h2>
 
-Experience Luxury
-
-</h2>
-
-<p class="subheading">
-
-Explore the elegance and comfort of Royal Stay Hotel.
-
-</p>
+<p class="subheading">Khám phá sự tinh tế và tiện nghi tại Khách sạn Mường Thanh Sông Lam.</p>
 
 <div class="row">
 
@@ -154,29 +146,9 @@ Explore the elegance and comfort of Royal Stay Hotel.
 
 <div class="gallery-item">
 
-<img src="images/deluxe.jpg">
+<img src="images/deluxe1.jpg">
 
-<div class="caption">
-
-Luxury Deluxe Room
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="gallery-item">
-
-<img src="images/executive.jpg">
-
-<div class="caption">
-
-Executive Suite
-
-</div>
+<div class="caption">Phòng Deluxe sang trọng</div>
 
 </div>
 
@@ -186,29 +158,9 @@ Executive Suite
 
 <div class="gallery-item">
 
-<img src="images/presidential.jpg">
+<img src="images/suitemotropole.jpg">
 
-<div class="caption">
-
-Presidential Suite
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="gallery-item">
-
-<img src="images/loby.jpg">
-
-<div class="caption">
-
-Hotel Lobby
-
-</div>
+<div class="caption">Phòng Suite Executive</div>
 
 </div>
 
@@ -218,13 +170,9 @@ Hotel Lobby
 
 <div class="gallery-item">
 
-<img src="images/swimming.jpg">
+<img src="images/suitepresident.jpg">
 
-<div class="caption">
-
-Swimming Pool
-
-</div>
+<div class="caption">Phòng Suite Tổng thống</div>
 
 </div>
 
@@ -234,13 +182,33 @@ Swimming Pool
 
 <div class="gallery-item">
 
-<img src="images/fine.jpg">
+<img src="images/sanhmetrople.jpg">
 
-<div class="caption">
-
-Fine Dining Restaurant
+<div class="caption">Sảnh khách sạn</div>
 
 </div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="gallery-item">
+
+<img src="images/swimmingpool.jpg">
+
+<div class="caption">Hồ bơi</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="gallery-item">
+
+<img src="images/restaurantmetropole.jpg">
+
+<div class="caption">Nhà hàng ẩm thực cao cấp</div>
 
 </div>
 
@@ -252,9 +220,21 @@ Fine Dining Restaurant
 
 <img src="images/spa.jpg">
 
+<div class="caption">Spa và chăm sóc sức khỏe</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="gallery-item">
+
+<img src="images/bathroom.jpg">
+
 <div class="caption">
 
-Spa & Wellness
+Phòng tắm sang trọng
 
 </div>
 
@@ -266,11 +246,11 @@ Spa & Wellness
 
 <div class="gallery-item">
 
-<img src="images/honeymooon.jpg">
+<img src="images/meetingroom.jpg">
 
 <div class="caption">
 
-Luxury Bathroom
+Phòng hội nghị
 
 </div>
 
@@ -282,29 +262,9 @@ Luxury Bathroom
 
 <div class="gallery-item">
 
-<img src="images/loby.jpg">
+<img src="images/gymfittness.jpg">
 
-<div class="caption">
-
-Conference Hall
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="gallery-item">
-
-<img src="images/gym.jpg">
-
-<div class="caption">
-
-Fitness Center
-
-</div>
+<div class="caption">Trung tâm thể hình</div>
 
 </div>
 
@@ -314,13 +274,9 @@ Fitness Center
 
 <div class="gallery-item">
 
-<img src="images/ggarden.jpg">
+<img src="images/vuonmetropole.jpg">
 
-<div class="caption">
-
-Garden View
-
-</div>
+<div class="caption">Hướng nhìn ra vườn</div>
 
 </div>
 
@@ -330,13 +286,9 @@ Garden View
 
 <div class="gallery-item">
 
-<img src="images/night.jpg">
+<img src="images/night1.jpg">
 
-<div class="caption">
-
-Night View
-
-</div>
+<div class="caption">Khung cảnh ban đêm</div>
 
 </div>
 

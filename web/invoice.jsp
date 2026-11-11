@@ -1,8 +1,76 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="model.Booking"%>
 <%@page import="model.Customer"%>
 <%@page import="model.Room"%>
+
+<%!
+private String viRoomType(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Single": return "Phòng đơn";
+        case "Double": return "Phòng đôi";
+        case "Standard": return "Phòng tiêu chuẩn";
+        case "Deluxe": return "Phòng Deluxe";
+        case "Suite": return "Phòng Suite";
+        case "Family": return "Phòng gia đình";
+        case "Executive": return "Phòng Executive";
+        case "Presidential": return "Phòng Tổng thống";
+        case "Honeymoon": return "Phòng trăng mật";
+        default: return value;
+    }
+}
+private String viRoomStatus(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Available": return "Còn trống";
+        case "Booked": return "Đã đặt";
+        case "Maintenance": return "Đang bảo trì";
+        case "Pending": return "Đang chờ";
+        case "Confirmed": return "Đã xác nhận";
+        case "Checked In": return "Đã nhận phòng";
+        case "Checked Out": return "Đã trả phòng";
+        case "Cancelled": return "Đã hủy";
+        default: return value;
+    }
+}
+private String viGender(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Male": return "Nam";
+        case "Female": return "Nữ";
+        case "Other": return "Khác";
+        default: return value;
+    }
+}
+private String viMessage(String value) {
+    if (value == null) return "";
+    switch (value) {
+        case "Invalid Email": return "Email không tồn tại.";
+        case "Invalid Password": return "Mật khẩu không chính xác.";
+        case "Login Failed": return "Đăng nhập không thành công.";
+        case "Please Login as Admin": return "Vui lòng đăng nhập bằng tài khoản quản trị viên.";
+        case "Please Login First": return "Vui lòng đăng nhập trước.";
+        case "Please login to book a room.": return "Vui lòng đăng nhập để đặt phòng.";
+        case "Please Fill All Required Fields": return "Vui lòng điền đầy đủ các trường bắt buộc.";
+        case "Email Already Registered": return "Email này đã được đăng ký.";
+        case "Registration Failed": return "Đăng ký không thành công.";
+        case "Something Went Wrong": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Email not found.": return "Không tìm thấy email này.";
+        case "Something went wrong.": return "Đã xảy ra lỗi. Vui lòng thử lại.";
+        case "Password updated successfully. Please login.": return "Cập nhật mật khẩu thành công. Vui lòng đăng nhập.";
+        case "Customer Not Found": return "Không tìm thấy khách hàng.";
+        case "Current Password is Incorrect": return "Mật khẩu hiện tại không đúng.";
+        case "New Password and Confirm Password do not match": return "Mật khẩu mới và mật khẩu xác nhận không khớp.";
+        case "Unable to Change Password": return "Không thể đổi mật khẩu.";
+        case "Password Changed Successfully": return "Đổi mật khẩu thành công.";
+        case "Room Added Successfully": return "Thêm phòng thành công.";
+        case "Room Updated Successfully": return "Cập nhật phòng thành công.";
+        case "Unable to Update Room": return "Không thể cập nhật phòng.";
+        default: return value;
+    }
+}
+%>
 
 <%
 Booking booking=(Booking)request.getAttribute("booking");
@@ -11,7 +79,7 @@ Room room=(Room)request.getAttribute("room");
 
 if(booking==null || customer==null || room==null){
 
-    response.sendRedirect("CustomerDashboardServlet");
+    response.sendRedirect("ManageBookingServlet");
     return;
 
 }
@@ -19,7 +87,7 @@ if(booking==null || customer==null || room==null){
 
 <!DOCTYPE html>
 
-<html>
+<html lang="vi">
 
 <head>
 
@@ -28,11 +96,7 @@ if(booking==null || customer==null || room==null){
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>
-
-Invoice
-
-</title>
+<title>Hóa đơn</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
 rel="stylesheet">
@@ -161,33 +225,17 @@ class="logo">
 
 <div class="col-md-6 text-center">
 
-<div class="hotel-name">
+<div class="hotel-name">Khách sạn Mường Thanh Sông Lam</div>
 
-Royal Virasat Hotel
-
-</div>
-
-<div>
-
-Luxury Hotel & Resort
-
-</div>
+<div>Khách sạn và khu nghỉ dưỡng cao cấp</div>
 
 </div>
 
 <div class="col-md-3 text-end">
 
-<div class="invoice-title">
+<div class="invoice-title">HÓA ĐƠN</div>
 
-INVOICE
-
-</div>
-
-<p>
-
-Invoice #
-
-<b>
+<p>Số hóa đơn<b>
 
 <%=booking.getBookingId()%>
 
@@ -195,11 +243,7 @@ Invoice #
 
 </p>
 
-<p>
-
-Booking Date
-
-<br>
+<p>Ngày đặt phòng<br>
 
 <b>
 
@@ -215,21 +259,13 @@ Booking Date
 
 <hr>
 
-<div class="section-title">
-
-Customer Details
-
-</div>
+<div class="section-title">Thông tin khách hàng</div>
 
 <table class="table table-bordered">
 
 <tr>
 
-<td class="label">
-
-Customer ID
-
-</td>
+<td class="label">Mã khách hàng</td>
 
 <td>
 
@@ -241,11 +277,7 @@ Customer ID
 
 <tr>
 
-<td class="label">
-
-Customer Name
-
-</td>
+<td class="label">Tên khách hàng</td>
 
 <td>
 
@@ -257,11 +289,7 @@ Customer Name
 
 <tr>
 
-<td class="label">
-
-Email
-
-</td>
+<td class="label">Email</td>
 
 <td>
 
@@ -273,11 +301,7 @@ Email
 
 <tr>
 
-<td class="label">
-
-Mobile Number
-
-</td>
+<td class="label">Số điện thoại</td>
 
 <td>
 
@@ -289,11 +313,7 @@ Mobile Number
 
 <tr>
 
-<td class="label">
-
-Address
-
-</td>
+<td class="label">Địa chỉ</td>
 
 <td>
 
@@ -313,21 +333,13 @@ Address
 
 </table>
 
-<div class="section-title">
-
-Room & Booking Details
-
-</div>
+<div class="section-title">Thông tin phòng và đặt phòng</div>
 
 <table class="table table-bordered">
 
 <tr>
 
-<td class="label">
-
-Room Number
-
-</td>
+<td class="label">Số phòng</td>
 
 <td>
 
@@ -339,15 +351,11 @@ Room Number
 
 <tr>
 
-<td class="label">
-
-Room Type
-
-</td>
+<td class="label">Loại phòng</td>
 
 <td>
 
-<%=room.getRoomType()%>
+<%=viRoomType(room.getRoomType())%>
 
 </td>
 
@@ -355,11 +363,7 @@ Room Type
 
 <tr>
 
-<td class="label">
-
-Check-In Date
-
-</td>
+<td class="label">Ngày nhận phòng</td>
 
 <td>
 
@@ -371,11 +375,7 @@ Check-In Date
 
 <tr>
 
-<td class="label">
-
-Check-Out Date
-
-</td>
+<td class="label">Ngày trả phòng</td>
 
 <td>
 
@@ -387,15 +387,11 @@ Check-Out Date
 
 <tr>
 
-<td class="label">
-
-Guests
-
-</td>
+<td class="label">Số khách</td>
 
 <td>
 
-<%=booking.getGuests()%>
+<%=booking.getGuests()%> khách
 
 </td>
 
@@ -403,17 +399,13 @@ Guests
 
 <tr>
 
-<td class="label">
-
-Booking Status
-
-</td>
+<td class="label">Trạng thái đặt phòng</td>
 
 <td>
 
 <span class="status">
 
-<%=booking.getBookingStatus()%>
+<%=viRoomStatus(booking.getBookingStatus())%>
 
 </span>
 
@@ -423,11 +415,7 @@ Booking Status
 
 </table>
 
-<div class="section-title">
-
-Payment Summary
-
-</div>
+<div class="section-title">Tổng kết thanh toán</div>
 
 <table class="table table-bordered text-center">
 
@@ -435,17 +423,9 @@ Payment Summary
 
 <tr>
 
-<th>
+<th>Mô tả</th>
 
-Description
-
-</th>
-
-<th>
-
-Amount (₹)
-
-</th>
+<th>Thành tiền (₫)</th>
 
 </tr>
 
@@ -457,29 +437,13 @@ Amount (₹)
 
 <td>
 
-<%=room.getRoomType()%> Room Charges
+<%=viRoomType(room.getRoomType())%> Tiền phòng
 
 </td>
 
 <td>
 
-₹ <%=booking.getTotalAmount()%>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-GST & Service Charges
-
-</td>
-
-<td>
-
-Included
+<%=String.format(java.util.Locale.forLanguageTag("vi-VN"), "%,.0f", booking.getTotalAmount())%> ₫
 
 </td>
 
@@ -487,15 +451,19 @@ Included
 
 <tr>
 
+<td>Thuế và phí dịch vụ</td>
+
+<td>Đã bao gồm</td>
+
+</tr>
+
+<tr>
+
+<td>Chi phí khác</td>
+
 <td>
 
-Other Charges
-
-</td>
-
-<td>
-
-₹ 0.00
+0 ₫
 
 </td>
 
@@ -505,11 +473,7 @@ Other Charges
 
 <td>
 
-<b>
-
-Grand Total
-
-</b>
+<b>Tổng cộng</b>
 
 </td>
 
@@ -517,7 +481,7 @@ Grand Total
 
 <b>
 
-₹ <%=booking.getTotalAmount()%>
+<%=String.format(java.util.Locale.forLanguageTag("vi-VN"), "%,.0f", booking.getTotalAmount())%> ₫
 
 </b>
 
@@ -533,21 +497,13 @@ Grand Total
 
 <h4>
 
-✅ Booking Confirmed Successfully
+✅ Đặt phòng thành công
 
 </h4>
 
-<p class="mb-0">
+<p class="mb-0">Cảm ơn bạn đã lựa chọn<b>Khách sạn Mường Thanh</b>.
 
-Thank you for choosing
-
-<b>
-
-Royal Virasat Hotel
-
-</b>.
-
-We wish you a pleasant stay.
+Chúc bạn có kỳ nghỉ vui vẻ.
 
 </p>
 
@@ -559,7 +515,7 @@ We wish you a pleasant stay.
 onclick="window.print()"
 class="btn btn-warning btn-lg me-3">
 
-🖨 Print Invoice
+🖨 In hóa đơn
 
 </button>
 
@@ -567,7 +523,7 @@ class="btn btn-warning btn-lg me-3">
 href="CustomerDashboardServlet"
 class="btn btn-dark btn-lg">
 
-🏠 Back to Dashboard
+🏠 Về trang tổng quan
 
 </a>
 
@@ -577,35 +533,31 @@ class="btn btn-dark btn-lg">
 
 <div class="text-center">
 
-<h5 style="color:#D4AF37;">
-
-Royal Virasat Hotel
-
-</h5>
+<h5 style="color:#D4AF37;">Khách sạn Mường Thanh</h5>
 
 <p>
 
-Thank you for choosing Royal Virasat Hotel.
+Cảm ơn bạn đã lựa chọn Khách sạn Mường Thanh.
 
-We look forward to welcoming you again.
+Chúng tôi mong sớm được đón tiếp bạn lần nữa.
 
 </p>
 
 <p>
 
-📍 Bengaluru, Karnataka, India
+📍 Vinh, Quang Trung, Nghệ An
 
 </p>
 
 <p>
 
-📞 +91 9876543210
+📞 +84 859096539
 
 </p>
 
 <p>
 
-✉ support@royalvirasathotel.com
+✉ letuananh06012003@gmail.com
 
 </p>
 

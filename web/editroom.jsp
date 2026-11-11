@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="model.Room"%>
 
@@ -22,7 +22,7 @@ if(room==null){
 
 <!DOCTYPE html>
 
-<html>
+<html lang="vi">
 
 <head>
 
@@ -31,11 +31,7 @@ if(room==null){
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>
-
-Edit Room
-
-</title>
+<title>Sửa thông tin phòng</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
 rel="stylesheet">
@@ -113,11 +109,7 @@ color:white;
 
 <div class="card">
 
-<div class="card-header">
-
-Edit Room
-
-</div>
+<div class="card-header">Sửa thông tin phòng</div>
 
 <div class="card-body">
 
@@ -132,11 +124,7 @@ value="<%=room.getRoomId()%>">
 
 <div class="col-md-6 mb-3">
 
-<label>
-
-Room Number
-
-</label>
+<label>Số phòng</label>
 
 <input
 type="number"
@@ -149,11 +137,7 @@ value="<%=room.getRoomNumber()%>">
 
 <div class="col-md-6 mb-3">
 
-<label>
-
-Room Type
-
-</label>
+<label>Loại phòng</label>
 
 <select
 name="roomType"
@@ -161,32 +145,16 @@ class="form-select"
 required>
 
 <option value="Single"
-<%=room.getRoomType().equals("Single")?"selected":""%>>
-
-Single
-
-</option>
+<%=room.getRoomType().equals("Single")?"selected":""%>>Phòng đơn</option>
 
 <option value="Double"
-<%=room.getRoomType().equals("Double")?"selected":""%>>
-
-Double
-
-</option>
+<%=room.getRoomType().equals("Double")?"selected":""%>>Phòng đôi</option>
 
 <option value="Deluxe"
-<%=room.getRoomType().equals("Deluxe")?"selected":""%>>
-
-Deluxe
-
-</option>
+<%=room.getRoomType().equals("Deluxe")?"selected":""%>>Phòng Deluxe</option>
 
 <option value="Suite"
-<%=room.getRoomType().equals("Suite")?"selected":""%>>
-
-Suite
-
-</option>
+<%=room.getRoomType().equals("Suite")?"selected":""%>>Phòng Suite</option>
 
 </select>
 
@@ -194,11 +162,7 @@ Suite
 
 <div class="col-md-6 mb-3">
 
-<label>
-
-Capacity
-
-</label>
+<label>Sức chứa</label>
 
 <input
 type="number"
@@ -211,11 +175,7 @@ value="<%=room.getCapacity()%>">
 
 <div class="col-md-6 mb-3">
 
-<label>
-
-Price Per Night
-
-</label>
+<label>Giá mỗi đêm</label>
 
 <input
 type="number"
@@ -229,11 +189,7 @@ value="<%=room.getPrice()%>">
 
 <div class="col-md-12 mb-3">
 
-<label>
-
-Description
-
-</label>
+<label>Mô tả</label>
 
 <textarea
 name="description"
@@ -245,11 +201,7 @@ required><%=room.getDescription()%></textarea>
 
 <div class="col-md-6 mb-3">
 
-<label>
-
-Room Image
-
-</label>
+<label>Ảnh phòng</label>
 
 <input
 type="text"
@@ -260,7 +212,7 @@ value="<%=room.getRoomImage()%>">
 
 <small class="text-muted">
 
-Example:
+Ví dụ:
 deluxe.jpg
 
 </small>
@@ -269,11 +221,7 @@ deluxe.jpg
 
 <div class="col-md-6 mb-3">
 
-<label>
-
-Status
-
-</label>
+<label>Trạng thái</label>
 
 <select
 name="status"
@@ -281,25 +229,13 @@ class="form-select"
 required>
 
 <option value="Available"
-<%=room.getStatus().equals("Available")?"selected":""%>>
-
-Available
-
-</option>
+<%=room.getStatus().equals("Available")?"selected":""%>>Còn trống</option>
 
 <option value="Booked"
-<%=room.getStatus().equals("Booked")?"selected":""%>>
-
-Booked
-
-</option>
+<%=room.getStatus().equals("Booked")?"selected":""%>>Đã đặt</option>
 
 <option value="Maintenance"
-<%=room.getStatus().equals("Maintenance")?"selected":""%>>
-
-Maintenance
-
-</option>
+<%=room.getStatus().equals("Maintenance")?"selected":""%>>Đang bảo trì</option>
 
 </select>
 
@@ -311,20 +247,12 @@ Maintenance
 type="submit"
 class="btn btn-save btn-lg">
 
-<i class="fa-solid fa-floppy-disk"></i>
-
-Update Room
-
-</button>
+<i class="fa-solid fa-floppy-disk"></i>Cập nhật phòng</button>
 
 <a href="ManageRoomServlet"
 class="btn btn-secondary btn-lg ms-3">
 
-<i class="fa-solid fa-arrow-left"></i>
-
-Cancel
-
-</a>
+<i class="fa-solid fa-arrow-left"></i>Hủy</a>
 
 </div>
 

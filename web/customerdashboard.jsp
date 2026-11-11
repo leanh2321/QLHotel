@@ -4,7 +4,7 @@
     Author     : Asus
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String customerName = (String) session.getAttribute("customerName");
 
@@ -15,14 +15,14 @@ int cancelledBookings = (Integer) request.getAttribute("cancelledBookings");
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Customer Dashboard | Royal Virasat Hotel</title>
+<title>Trang khách hàng | Khách sạn Mường Thanh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -134,7 +134,7 @@ color:white;
 
 <div class="banner">
 
-<h1>Customer Dashboard</h1>
+<h1>Trang khách hàng</h1>
 
 </div>
 
@@ -144,7 +144,7 @@ color:white;
 
 <h2>
 
-Welcome,
+Xin chào,
 
 <%=customerName%>
 
@@ -152,11 +152,7 @@ Welcome,
 
 </h2>
 
-<p>
-
-Manage your bookings and enjoy your stay.
-
-</p>
+<p>Quản lý đặt phòng và tận hưởng kỳ nghỉ của bạn.</p>
 
 </div>
 
@@ -166,7 +162,7 @@ Manage your bookings and enjoy your stay.
 
 <div class="card p-3 text-center">
 
-<h5>Total Bookings</h5>
+<h5>Tổng số đặt phòng</h5>
 
 <h2 style="color:#D4AF37;">
 <%=totalBookings%>
@@ -180,7 +176,7 @@ Manage your bookings and enjoy your stay.
 
 <div class="card p-3 text-center">
 
-<h5>Active Bookings</h5>
+<h5>Đặt phòng đang hiệu lực</h5>
 
 <h2 style="color:green;">
 <%=activeBookings%>
@@ -194,7 +190,7 @@ Manage your bookings and enjoy your stay.
 
 <div class="card p-3 text-center">
 
-<h5>Completed</h5>
+<h5>Hoàn tất</h5>
 
 <h2 style="color:blue;">
 <%=completedBookings%>
@@ -208,7 +204,7 @@ Manage your bookings and enjoy your stay.
 
 <div class="card p-3 text-center">
 
-<h5>Cancelled</h5>
+<h5>Đã hủy</h5>
 
 <h2 style="color:red;">
 <%=cancelledBookings%>
@@ -228,23 +224,11 @@ Manage your bookings and enjoy your stay.
 
 <i>🏨</i>
 
-<h4 class="card-title">
+<h4 class="card-title">Đặt phòng</h4>
 
-Book Room
+<p>Đặt phòng cao cấp nhanh chóng.</p>
 
-</h4>
-
-<p>
-
-Reserve luxury rooms instantly.
-
-</p>
-
-<a href="RoomServlet" class="btn btn-custom">
-
-Book Now
-
-</a>
+<a href="RoomServlet" class="btn btn-custom">Đặt ngay</a>
 
 </div>
 
@@ -256,25 +240,13 @@ Book Now
 
 <i>📖</i>
 
-<h4 class="card-title">
+<h4 class="card-title">Lịch sử đặt phòng</h4>
 
-Booking History
-
-</h4>
-
-<p>
-
-View all previous bookings.
-
-</p>
+<p>Xem tất cả đặt phòng trước đây.</p>
 
 <a href="BookingHistoryServlet"
 
-class="btn btn-custom">
-
-View
-
-</a>
+class="btn btn-custom">Xem</a>
 
 </div>
 
@@ -286,25 +258,13 @@ View
 
 <i>👤</i>
 
-<h4 class="card-title">
+<h4 class="card-title">Hồ sơ của tôi</h4>
 
-My Profile
-
-</h4>
-
-<p>
-
-Update your account details.
-
-</p>
+<p>Cập nhật thông tin tài khoản.</p>
 
 <a href="ProfileServlet"
 
-class="btn btn-custom">
-
-Profile
-
-</a>
+class="btn btn-custom">Hồ sơ</a>
 
 </div>
 
@@ -316,25 +276,13 @@ Profile
 
 <i>🚪</i>
 
-<h4 class="card-title">
+<h4 class="card-title">Đăng xuất</h4>
 
-Logout
-
-</h4>
-
-<p>
-
-Securely logout from account.
-
-</p>
+<p>Đăng xuất an toàn khỏi tài khoản.</p>
 
 <a href="LogoutServlet"
 
-class="btn btn-danger">
-
-Logout
-
-</a>
+class="btn btn-danger">Đăng xuất</a>
 
 </div>
 
@@ -348,27 +296,23 @@ Logout
 
 <div class="card p-4">
 
-<h3 style="color:#D4AF37">
-
-Hotel Facilities
-
-</h3>
+<h3 style="color:#D4AF37">Tiện ích khách sạn</h3>
 
 <ul>
 
-<li>Luxury Rooms</li>
+<li>Phòng nghỉ sang trọng</li>
 
-<li>Free Wi-Fi</li>
+<li>Wi-Fi miễn phí</li>
 
-<li>Swimming Pool</li>
+<li>Hồ bơi</li>
 
-<li>Spa & Wellness</li>
+<li>Spa và chăm sóc sức khỏe</li>
 
-<li>Restaurant</li>
+<li>Nhà hàng</li>
 
-<li>Gym</li>
+<li>Phòng tập thể hình</li>
 
-<li>24×7 Room Service</li>
+<li>Dịch vụ phòng 24/7</li>
 
 </ul>
 
@@ -380,11 +324,7 @@ Hotel Facilities
 
 <div class="card p-4">
 
-<h3 style="color:#D4AF37">
-
-Need Help?
-
-</h3>
+<h3 style="color:#D4AF37">Bạn cần hỗ trợ?</h3>
 
 <p>
 
@@ -394,23 +334,15 @@ Email : support@royalstay.com
 
 <p>
 
-Phone : +91 9876543210
+Điện thoại : +91 9876543210
 
 </p>
 
-<p>
-
-Reception Available 24 × 7
-
-</p>
+<p>Lễ tân phục vụ 24/7</p>
 
 <a href="contact.jsp"
 
-class="btn btn-custom">
-
-Contact Support
-
-</a>
+class="btn btn-custom">Liên hệ hỗ trợ</a>
 
 </div>
 
