@@ -130,6 +130,30 @@ public class CustomerDAO {
     return exists;
 
 }
+
+public boolean emailExistsForOtherCustomer(String email, int customerId) {
+
+    boolean exists = false;
+
+    try {
+
+        Connection con = DBConnection.getConnection();
+        String sql = "SELECT customer_id FROM customer WHERE email=? AND customer_id<>?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, email);
+        ps.setInt(2, customerId);
+        ResultSet rs = ps.executeQuery();
+        exists = rs.next();
+        con.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return exists;
+
+}
+
     
 public Customer getCustomerById(int customerId){
 
@@ -186,7 +210,7 @@ public boolean updateCustomer(Customer customer) {
 
         Connection con = DBConnection.getConnection();
 
-        String sql = "UPDATE customer SET name=?, gender=?, dob=?, mobile=?, address=?, city=?, state=?, pincode=? WHERE customer_id=?";
+        String sql = "UPDATE customer SET name=?, gender=?, dob=?, mobile=?, email=?, address=?, city=?, state=?, pincode=? WHERE customer_id=?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
@@ -194,11 +218,12 @@ public boolean updateCustomer(Customer customer) {
         ps.setString(2, customer.getGender());
         ps.setString(3, customer.getDob());
         ps.setString(4, customer.getMobile());
-        ps.setString(5, customer.getAddress());
-        ps.setString(6, customer.getCity());
-        ps.setString(7, customer.getState());
-        ps.setString(8, customer.getPincode());
-        ps.setInt(9, customer.getCustomerId());
+        ps.setString(5, customer.getEmail());
+        ps.setString(6, customer.getAddress());
+        ps.setString(7, customer.getCity());
+        ps.setString(8, customer.getState());
+        ps.setString(9, customer.getPincode());
+        ps.setInt(10, customer.getCustomerId());
 
         status = ps.executeUpdate() > 0;
 

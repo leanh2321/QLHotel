@@ -66,6 +66,10 @@ private String viMessage(String value) {
         case "Room Added Successfully": return "Thêm phòng thành công.";
         case "Room Updated Successfully": return "Cập nhật phòng thành công.";
         case "Unable to Update Room": return "Không thể cập nhật phòng.";
+        case "Customer Added Successfully": return "Thêm khách hàng thành công.";
+        case "Unable to Add Customer": return "Không thể thêm khách hàng.";
+        case "Customer Updated Successfully": return "Cập nhật khách hàng thành công.";
+        case "Unable to Update Customer": return "Không thể cập nhật khách hàng.";
         default: return value;
     }
 }
@@ -154,7 +158,25 @@ color:white;
 
 <div class="container container-box">
 
-<h2>Quản lý khách hàng</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h2 class="mb-0">Quản lý khách hàng</h2>
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCustomerModal">+ Thêm khách hàng</button>
+</div>
+
+<%
+String success = request.getParameter("success");
+String error = request.getParameter("error");
+if (success != null) {
+%>
+<div class="alert alert-success"><%=viMessage(success)%></div>
+<%
+}
+if (error != null) {
+%>
+<div class="alert alert-danger"><%=viMessage(error)%></div>
+<%
+}
+%>
 
 <form action="ManageCustomerServlet" method="get">
 
@@ -182,6 +204,37 @@ value="<%=search%>">
 </form>
 
 <br>
+
+<div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <form action="AddCustomerServlet" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCustomerModalLabel">Thêm khách hàng</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">Họ tên *</label><input name="name" class="form-control" required maxlength="100"></div>
+            <div class="col-md-6"><label class="form-label">Email *</label><input name="email" type="email" class="form-control" required maxlength="150"></div>
+            <div class="col-md-6"><label class="form-label">Điện thoại *</label><input name="mobile" class="form-control" required maxlength="20"></div>
+            <div class="col-md-6"><label class="form-label">Mật khẩu *</label><input name="password" type="password" class="form-control" required minlength="6"></div>
+            <div class="col-md-6"><label class="form-label">Giới tính</label><select name="gender" class="form-select"><option value="Other">Khác</option><option value="Male">Nam</option><option value="Female">Nữ</option></select></div>
+            <div class="col-md-6"><label class="form-label">Ngày sinh *</label><input name="dob" type="date" class="form-control" required></div>
+            <div class="col-12"><label class="form-label">Địa chỉ</label><input name="address" class="form-control" maxlength="255"></div>
+            <div class="col-md-4"><label class="form-label">Thành phố</label><input name="city" class="form-control" maxlength="100"></div>
+            <div class="col-md-4"><label class="form-label">Tỉnh/Thành</label><input name="state" class="form-control" maxlength="100"></div>
+            <div class="col-md-4"><label class="form-label">Mã bưu điện</label><input name="pincode" class="form-control" maxlength="20"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          <button type="submit" class="btn btn-success">Lưu khách hàng</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <table class="table table-bordered table-hover">
 
@@ -260,6 +313,8 @@ for(Customer customer : customers){
 </td>
 
 <td>
+
+<a href="EditCustomerServlet?id=<%=customer.getCustomerId()%>" class="btn btn-primary btn-sm">Sửa</a>
 
 <a href="DeleteCustomerServlet?id=<%=customer.getCustomerId()%>"
 class="btn btn-danger btn-sm"

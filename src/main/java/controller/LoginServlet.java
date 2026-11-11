@@ -13,6 +13,7 @@ import model.Customer;
 import util.EncryptionUtil;
 
 import java.io.IOException;
+import java.util.Base64;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -43,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 
                 String dbPassword = customer.getPassword();
 
-                if (password.equals(dbPassword)) {
+                if (customerPasswordMatches(password, dbPassword)) {
 
                     HttpSession session = request.getSession();
 
@@ -105,6 +106,19 @@ public class LoginServlet extends HttpServlet {
 
         }
 
+    }
+
+    private boolean customerPasswordMatches(String password, String storedPassword) {
+        if (password == null || storedPassword == null) return false;
+        if (password.equals(storedPassword)) return true;
+
+        try {
+            byte[] encrypted = Base64.getDecoder().decode(storedPassword);
+            if (encrypted.length == 0 || encrypted.length % 16 != 0) return false;
+            return password.equals(EncryptionUtil.decrypt(storedPassword));
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
 }
